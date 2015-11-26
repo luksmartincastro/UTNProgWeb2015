@@ -1,0 +1,78 @@
+*{padding:0; margin:0;}
+
+table{padding:0px 0px 0px 0px;font-size:11px; line-height:14px; color:#000000;}
+
+.td_tabla1_panel {padding:2px 2px 2px 2px; width:210px; vertical-align:top;border:1px;font-weight:bold !important;}
+.tabla1_cont_panel {padding:3px 3px 3px 3px;border:solid 1px #a1a1a1;width:210px;font-weight:normal;}
+.td_pancen2_tab1_pre{padding:3px 3px 3px 3px;}
+
+.img_tabla1_panel{border:solid 0px #a1a1a1;width:120px; height:26px}
+
+.img_tabla1_panel_cel{border:solid 0px #c2c2c2;width:150px; height:360px}
+.td_pander_tab1_cel{padding:5px 20px 5px 20px;}
+
+.td_pan1_tab1_pie{padding:3px 3px 3px 3px;border:solid 1px #c2c2c2;width:210px;height:30px;font-weight:normal;}
+
+/*datos generales*/
+.textbox { border: 1px solid #c2c2c2; outline:0; height:15px; width: 110px; background-color:#ececec} 
+.col8{border: 1px solid #c2c2c2;background-color:#ececec}
+.lin{border: 1px solid #c2c2c2;}
+.fon{background-color:#ececec}
+.fon2{background-color:#c2c2c2}
+.fon3{background-color:#9d9d9d}
+.fon4{background-color:#337ab7}
+.marco{padding:0px 0px 0px 0px;height:10px;background-color:#9d9d9d}
+.marco1{padding:0px 0px 0px 0px;height:5px;background-color:#337ab7}
+
+/****** cabecera ******/
+.lin_cab{border: 1px solid #9d9d9d}
+.tex_cab{padding:10px 10px 10px 20px;height:65px;color:#ffffff;font-weight:bold !important;font-size:30px;}
+.tex_cab2{padding:10px 10px 10px 20px;height:65px;color:#000000;font-weight:bold !important;font-size:30px;}
+.tit_panel_usu{padding:10px 10px 10px 10px;height:36px;font-size:16px;}
+.tit_usu_cerrSes{padding:3px 2px 3px 2px;font-size:16px;}
+
+/****** Navegabilidad ******/
+.col_nav{background-color: #337ab7;}
+.col_nav2{background-color: #9d9d9d;color:#ffffff;font-weight:bold !important;font-size:15px;}
+
+/****** tabla *******/
+.pos_text_tabCab{padding:2px 0px 2px 0px;height:26px;color:#fff;background-color: #337ab7;border: 1px solid #c2c2c2;font-weight:bold !important;}
+.pos_text_tab{padding:2px 0px 2px 0px;height:26px;border: 1px solid #337ab7;}
+.pos_but_bus{padding:2px 2px 2px 15px;}
+
+/*principal admin*/
+.tit_panel_admin{font-weight:bold !important;padding:4px 4px 0px 10px;font-size:18px;}
+
+/*presupueso paneles*/
+.tit_panel_pre{border: 1px solid #ececec;font-weight:bold !important;padding:4px 4px 4px 10px;font-size:18px; background-color:#c2c2c2}
+.pos_img_mar{padding:3px 2px 3px 0px;}
+.img_mar{width:200px; height:40px;}
+.pos_img_mod{padding:3px 2px 3px 0px;}
+.img_mod{width:200px; height:300px;}
+.pos_combobox{padding:2px 0px 2px 0px;}
+.pos_checkbox{padding:0px 0px 0px 0px;}
+.pos_input{padding:2px 0px 2px 0px;}
+.pos_text{padding:3px 0px 3px 10px;}
+.pos_text2{padding:10px 0px 3px 10px;}
+.tam_input{ width:150px;}
+.pos_button{padding:8px 30px 8px 40px;}
+.pos_textArea{padding:2px 1px 2px 1px;}
+
+/*equipo paneles*/
+.pos_text_equi{padding:8px 0px 3px 10px;}
+.tam_input_equi{ width:168px;}
+.pos_input_equi{padding:7px 0px 4px 0px;}
+
+/*panel empleado*/
+.pos_butEmp{padding:0px 0px 14px 0px;}
+
+/*GrupFamiliar panel*/
+.pos_button_gruFam{padding:25px 0px 10px 10px;}
+
+/*login*/
+.col_nav_log{padding:8px 6px 8px 6px; background-color: #337ab7;height:36px; color:#ffffff;font-weight:bold !important;font-size:15px;}
+.col_nav2_log{background-color: #9d9d9d;color:#ffffff;font-weight:bold !important;font-size:15px;}
+
+/*liquidacion paneles*/
+.pos_text_liqui{padding:8px 0px 3px 10px;}
+.pos_text_liqui2{padding:8px 0px 3px 10px;font-weight:bold !important;font-size:15px;}

@@ -21,7 +21,8 @@
             "database"
         ],
         "psr-4": {
-            "adminsel\\": "app/"
+            "adminsel\\": "app/",
+            "Models\\": "app/Models/"
         }
     },
     "autoload-dev": {

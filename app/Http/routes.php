@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Authentication routes...
+/* Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('login', 'Auth\AuthController@postLogin');
 Route::get('logout', 'Auth\AuthController@getLogout');
@@ -31,11 +31,16 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 // Password reset routes...
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
-
+*/
 //----------------------------------------------------------------------
 //-----------------------AtPublicoController----------------------------
 //----------------------------------------------------------------------
 Route::get('AtPublicoIndex','AtPublicoController@index');
+Route::post('getModelos','AtPublicoController@getModelos');
+Route::post('getRepuestos','AtPublicoController@getRepuestos');
+
+Route::get('Recepcion','AtPublicoController@recepcion');
+Route::get('Entrega','AtPublicoController@entrega');
 //----------------------------------------------------------------------
 //-----------------------AdminController----------------------------
 //----------------------------------------------------------------------
