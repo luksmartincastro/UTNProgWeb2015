@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use adminsel\Http\Controllers\Controller;
+
 use adminsel\Models\Marca;
 use adminsel\Models\Gama;
 use adminsel\Models\Modelo;
@@ -10,12 +11,15 @@ use adminsel\Models\Accesorio;
 use adminsel\Models\FallaGenerica;
 use adminsel\Models\Servicio;
 use adminsel\Models\SelConfig;
+use adminsel\Models\Repuesto;
+use adminsel\Models\ServGama;
+use adminsel\Models\Equipo;
 
 class AtPublicoController extends Controller
 {
 	//------------------------------------------
 	//------------------------------------------
-	//------------------------------------------
+	//------------------------------------------ 
     public function index()
     {
         $idSEL = 1;
@@ -61,6 +65,74 @@ class AtPublicoController extends Controller
                 "msg"=>"Succes",
                 "repuestos"=>$repuestos->toArray()
                 ],200);
+    }
+    //--------------------------------------------------------
+    //--------------------------------------------------------
+    //--------------------------------------------------------
+    public function calcularFechaEntrega()
+    {
+        $hoy = getdate();
+        $i = 0;
+        $B = 0;
+        $selconfig = SelConfig::find(1);
+        $cupo = $selconfig->cupoReparacion;
+        while ($i <= 14 and $B == 0) 
+        {
+            $fechaCosulta = date_create($hoy['year'].'-'.$hoy['mon'].'-'.$hoy['mday']);         
+            date_add($fechaCosulta,date_interval_create_from_date_string( $i." days"));         
+            $cantEquipo = Equipo::where('fechaEntrega', '=', $fechaCosulta)->count();                                   
+            if ($cantEquipo < $cupo)
+            {
+                $B = 1;             
+            }           
+            $i++;
+        }
+        return date_format($fechaCosulta,"Y-m-d");
+        //return date_format($fechaCosulta,"d-m-Y");
+    }
+    //------------------------------------------
+    //------------------------------------------
+    //------------------------------------------
+    public function  getPresupuesto(Request $request)
+    {
+
+        $idGama = $request->idGama;  //Input::get('idGama');        
+        $vectorRep = $request->vectorRep; //Input::get('vectorRep');
+        $vectorServ = $request->vectorServ; // Input::get('vectorServ');
+        $totalRep = 0; 
+        $totalServ = 0;
+        if ( sizeof($vectorRep) != 0) 
+        {
+            foreach ($vectorRep as $idRep) {
+                $idRep = (int) $idRep;
+                $rep = Repuesto::find($idRep); //rep id:2=>120----rep id:3=>40
+                $totalRep = $totalRep + $rep->precioVenta; // totalRep = 160
+            }
+            
+        }
+        if ( sizeof($vectorServ) != 0) 
+        {
+            foreach ($vectorServ as $idServ) {
+                $idServ = (int) $idServ;
+                $idGama = (int) $idGama; // ser:2 gama:3 =>80 --- serv:3 gama:3 =>80
+                $Servgama = ServGama::where('servgama_idserv_foreign', '=', $idServ)
+                                    ->where('servgama_idgam_foreign', '=', $idGama)
+                                    ->first();
+                
+                $totalServ = $totalServ + $Servgama->costoserv; // totalServ = 160            
+            }           
+        }   
+        $costoMO = Gama::find($idGama)->costoManoObra;  
+        //--- funcion q calcula la fecha de entrega---
+        $fechaPres = AtPublicoController::calcularFechaEntrega();
+        
+        return response()->json([
+                "msg"=>"Succes",
+                "costoMO"=>$costoMO,
+                "totalRep"=>$totalRep,
+                "totalServ"=>$totalServ,
+                "fechaPres"=>$fechaPres
+                ],200);        
     }
     //------------------------------------------
 	//------------------------------------------

@@ -4,21 +4,21 @@ namespace adminsel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Servicio extends Model 
+class ServGama extends Model 
 {    
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'servicio';
+    protected $table = 'servgama';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['nombreServicio'];
+    protected $fillable = ['costoserv'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -29,18 +29,15 @@ class Servicio extends Model
 	
 	//------------- metodos --------------------
     //------------------------------------------
-	public function equipos()
-    {
-        return $this->hasMany('ServEquipo','servequipo_idserv_foreign');
+	public function servicio()
+    {        
+        return $this->belongsTo('adminsel\Models\Servicio'); 
     }
     //------------------------------------------
-    public function gamas()
-    {
-        return $this->hasMany('ServGama','servgama_idserv_foreign');
+    //------------------------------------------
+    public function gama()
+    {        
+        return $this->belongsTo('adminsel\Models\Gama'); 
     }
-    //-----------------------------------------
-    public function selconfig()
-    {
-        return $this->belongsTo('adminsel\Models\SelConfig'); 
-    }
+    //------------------------------------------
 }
