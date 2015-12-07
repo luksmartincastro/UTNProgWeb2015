@@ -28,9 +28,19 @@ class Gama extends Model
     protected $hidden = [];
 	
 	//------------- metodos --------------------
-
-	/*public function modelos()
+    //------------------------------------------
+	public function modelos()
 	{
 		return $this->hasMany('Modelo','modelo_idmarca_foreign');
-	}*/
+	}
+    //------------------------------------------
+    public function servicios()
+    {
+        return $this->hasMany('ServGama','servgama_idgam_foreign');
+    }
+    //-----------------------------------------
+    public function selconfig()
+    {
+        return $this->belongsTo('adminsel\Models\SelConfig'); 
+    }
 }
