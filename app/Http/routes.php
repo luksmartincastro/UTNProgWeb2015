@@ -11,8 +11,18 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
+});*/
+
+Route::get('/', function () {
+    return view('index');
+});
+
+Route::group(['prefix' => 'api'], function()
+{
+    Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
+    Route::post('authenticate', 'AuthenticateController@authenticate');
 });
 
 /* Authentication routes...
@@ -41,7 +51,9 @@ Route::post('getRepuestos','AtPublicoController@getRepuestos');
 Route::post('getPresupuesto','AtPublicoController@getPresupuesto');
 
 Route::get('Recepcion','AtPublicoController@recepcion');
+
 Route::get('Entrega','AtPublicoController@entrega');
+Route::get('getOrdenApeNom','AtPublicoController@getOrdenApeNom');
 //----------------------------------------------------------------------
 //-----------------------AdminController----------------------------
 //----------------------------------------------------------------------

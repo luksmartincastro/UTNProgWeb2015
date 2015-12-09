@@ -14,6 +14,7 @@ use adminsel\Models\SelConfig;
 use adminsel\Models\Repuesto;
 use adminsel\Models\ServGama;
 use adminsel\Models\Equipo;
+use adminsel\Models\OrdenReparacion;
 
 class AtPublicoController extends Controller
 {
@@ -135,17 +136,33 @@ class AtPublicoController extends Controller
                 ],200);        
     }
     //------------------------------------------
-	//------------------------------------------
-	//------------------------------------------
+    //------------------------------------------
+    //------------------------------------------
+    public function getOrdenApeNom(Request $request)
+    {
+        $term = $request->term;
+        //$term = 'ru';
+        $ordenes = OrdenReparacion::where('apeNom', 'LIKE', "%$term%")->get();   
+
+        return response()->json([
+                "msg"=>"Succes",
+                "ordenes"=>$ordenes                
+                ],200);           
+    }
+
+
+    //------------------------------------------
+    //------------------------------------------
+    //------------------------------------------
     public function recepcion()
     {
-        return \View::make('AtPublico.recepcion');   		        
+        return \View::make('AtPublico.recepcion');                  
     }
     //------------------------------------------
-	//------------------------------------------
-	//------------------------------------------
+    //------------------------------------------
+    //------------------------------------------
     public function entrega()
     {
-        return \View::make('AtPublico.entrega');   		        
+        return \View::make('AtPublico.entrega');                
     }
 }

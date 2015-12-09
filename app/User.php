@@ -36,4 +36,24 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    //-----------------------------------------------------
+    //--------------------- metodos -----------------------
+    //-----------------------------------------------------
+
+    /*public function categoria()
+    {
+        return $this->belongsTo('adminsel\Models\Categoria'); 
+    }
+    //-----------------------------------------------------
+
+    public function selconfig()
+    {
+        return $this->belongsTo('adminsel\Models\SelConfig'); 
+    }
+    //-----------------------------------------
+    public function equipos()
+    {
+        return $this->hasMany('adminsel\Models\EmpleadoEquipo','empleadoequipo_idUser_foreign');
+    }*/
 }
