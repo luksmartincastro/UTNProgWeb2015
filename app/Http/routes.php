@@ -11,13 +11,13 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
+
+/*Route::get('/', function () {
+    return view('index');
+});*/
 
 Route::group(['prefix' => 'api'], function()
 {
@@ -53,7 +53,9 @@ Route::post('getPresupuesto','AtPublicoController@getPresupuesto');
 Route::get('Recepcion','AtPublicoController@recepcion');
 
 Route::get('Entrega','AtPublicoController@entrega');
-Route::get('getOrdenApeNom','AtPublicoController@getOrdenApeNom');
+Route::post('getOrdenApeNom', 'AtPublicoController@getOrdenApeNom');
+Route::post('getOrdenNumero','AtPublicoController@getOrdenNumero');
+Route::get('getTraerOrden','AtPublicoController@getTraerOrden');
 //----------------------------------------------------------------------
 //-----------------------AdminController----------------------------
 //----------------------------------------------------------------------

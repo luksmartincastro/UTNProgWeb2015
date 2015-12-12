@@ -43,4 +43,9 @@ class Gama extends Model
     {
         return $this->belongsTo('adminsel\Models\SelConfig'); 
     }
+    //-----------------------------------------
+    public function equipos()
+    {
+        return $this->hasMany('Equipo','equipo_idGama_foreign');
+    }
 }
