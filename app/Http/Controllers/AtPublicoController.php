@@ -14,6 +14,7 @@ use adminsel\Models\SelConfig;
 use adminsel\Models\Repuesto;
 use adminsel\Models\ServGama;
 use adminsel\Models\Equipo;
+use adminsel\Models\OrdenReparacion;
 
 class AtPublicoController extends Controller
 {
@@ -134,18 +135,75 @@ class AtPublicoController extends Controller
                 "fechaPres"=>$fechaPres
                 ],200);        
     }
+
     //------------------------------------------
-	//------------------------------------------
-	//------------------------------------------
+    //------------------------------------------
+    //------------------------------------------
     public function recepcion()
     {
-        return \View::make('AtPublico.recepcion');   		        
+        return \View::make('AtPublico.recepcion');                  
     }
-    //------------------------------------------
-	//------------------------------------------
-	//------------------------------------------
+    //-------------------------------------------------------------------------------
+    //----------------------------ENTREGA--------------------------------------------
+    //-------------------------------------------------------------------------------
     public function entrega()
     {
-        return \View::make('AtPublico.entrega');   		        
+        return \View::make('AtPublico.entrega');                
     }
+    //------------------------------------------
+    //------------------------------------------
+    //------------------------------------------
+    public function getOrdenApeNom(Request $request)
+    {
+        $term = $request->term;
+        //$term = 'ru';
+        $ordenes = OrdenReparacion::where('apeNom', 'LIKE', "%$term%")->get();   
+
+        return response()->json([
+                "msg"=>"Succes",
+                "ordenes"=>$ordenes                
+                ],200);           
+    }
+    //------------------------------------------
+    //------------------------------------------
+    //------------------------------------------
+    public function getOrdenNumero(Request $request)
+    {
+        $term = $request->term;
+        //$term = 1;
+        $ordenes = OrdenReparacion::where('id', 'LIKE', "%$term%")->get();
+
+        return response()->json([
+                "msg"=>"Succes",
+                "ordenes"=>$ordenes
+                ],200); 
+    }
+    //------------------------------------------
+    //------------------------------------------
+    //------------------------------------------
+    public function getTraerOrden(Request $request)
+    {
+        //$idOrden = $request->idOrden;
+        $idOrden = 7;
+        // buscar orden primero, para la orden buscar todos los telefonos
+        $orden = OrdenReparacion::find($idOrden);
+        $equipos = OrdenReparacion::find($idOrden)->equipos;
+        // para cada equipo se recupera la marca, modelo y gama e insertar en formato json
+        foreach ($equipos as $equipo)
+        {
+            $gama = Gama::find($equipo->equipo_idGama_foreign);
+            $modelo = Modelo::find($equipo->equipo_idMod_foreign);
+            $marca = Marca::find($modelo->modelo_idmarca_foreign);       
+            $equipo['gama'] = $gama->nombreGama;
+            $equipo['modelo'] = $modelo->nombreModelo;
+            $equipo['marca'] = $marca->nombreMarca;
+        }
+        
+        return response()->json([
+                "msg"=>"Succes",
+                "orden"=>$orden,
+                "equipos"=>$equipos
+                ],200);                
+    }
+
 }

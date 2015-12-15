@@ -146,6 +146,7 @@ return [
         adminsel\Providers\RouteServiceProvider::class,
         'Way\Generators\GeneratorsServiceProvider',
         'Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider',
+
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
     ],

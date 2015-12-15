@@ -15,6 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*Route::get('/', function () {
+    return view('index');
+});*/
+
+Route::group(['prefix' => 'api'], function()
+{
+    Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
+    Route::post('authenticate', 'AuthenticateController@authenticate');
+});
+
 /* Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('login', 'Auth\AuthController@postLogin');
@@ -41,7 +51,11 @@ Route::post('getRepuestos','AtPublicoController@getRepuestos');
 Route::post('getPresupuesto','AtPublicoController@getPresupuesto');
 
 Route::get('Recepcion','AtPublicoController@recepcion');
+
 Route::get('Entrega','AtPublicoController@entrega');
+Route::post('getOrdenApeNom', 'AtPublicoController@getOrdenApeNom');
+Route::post('getOrdenNumero','AtPublicoController@getOrdenNumero');
+Route::get('getTraerOrden','AtPublicoController@getTraerOrden');
 //----------------------------------------------------------------------
 //-----------------------AdminController----------------------------
 //----------------------------------------------------------------------

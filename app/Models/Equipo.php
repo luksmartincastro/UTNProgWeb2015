@@ -33,10 +33,10 @@ class Equipo extends Model
     //------------- metodos --------------------
     //------------------------------------------
 
-    /*public function ordenreparacion()
+    public function ordenreparacion()
     {
-        return $this->belongsTo('OrdenReparacion'); 
-    }*/
+        return $this->belongsTo('adminsel\Models\OrdenReparacion'); 
+    }
     //-----------------------------------------
     public function gama()
     {
