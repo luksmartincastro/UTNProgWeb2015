@@ -183,8 +183,8 @@ class AtPublicoController extends Controller
     //------------------------------------------
     public function getTraerOrden(Request $request)
     {
-        //$idOrden = $request->idOrden;
-        $idOrden = 7;
+        $idOrden = $request->idOrden;
+        //$idOrden = 7;
         // buscar orden primero, para la orden buscar todos los telefonos
         $orden = OrdenReparacion::find($idOrden);
         $equipos = OrdenReparacion::find($idOrden)->equipos;
@@ -197,8 +197,9 @@ class AtPublicoController extends Controller
             $equipo['gama'] = $gama->nombreGama;
             $equipo['modelo'] = $modelo->nombreModelo;
             $equipo['marca'] = $marca->nombreMarca;
+            // traer los demas datos del equipo, fallas, servicios, accesorios, repuestos
         }
-        
+
         return response()->json([
                 "msg"=>"Succes",
                 "orden"=>$orden,
