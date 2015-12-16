@@ -198,6 +198,7 @@ class AtPublicoController extends Controller
             $equipo['modelo'] = $modelo->nombreModelo;
             $equipo['marca'] = $marca->nombreMarca;
             // traer los demas datos del equipo, fallas, servicios, accesorios, repuestos
+            
         }
 
         return response()->json([
