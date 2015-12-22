@@ -15,6 +15,7 @@ use adminsel\Models\Repuesto;
 use adminsel\Models\ServGama;
 use adminsel\Models\Equipo;
 use adminsel\Models\OrdenReparacion;
+use adminsel\Models\EquipoAccesorio;
 
 class AtPublicoController extends Controller
 {
@@ -183,6 +184,48 @@ class AtPublicoController extends Controller
     //------------------------------------------
     public function getTraerOrden(Request $request)
     {
+        $idOrden = $request->idOrden;        
+       // $idOrden = 7;
+        // buscar orden primero, para la orden buscar todos los telefonos
+        $orden = OrdenReparacion::find($idOrden);
+        $equipos = OrdenReparacion::find($idOrden)->equipos;
+        // para cada equipo se recupera la marca, modelo y gama e insertar en formato json
+        foreach ($equipos as $equipo)
+        {
+            $idEq = $equipo->id;
+            $gama = Gama::find($equipo->equipo_idGama_foreign);
+            $modelo = Modelo::find($equipo->equipo_idMod_foreign);
+            $marca = Marca::find($modelo->modelo_idmarca_foreign);       
+            $equipo['gama'] = $gama->nombreGama;
+            $equipo['modelo'] = $modelo->nombreModelo;
+            $equipo['marca'] = $marca->nombreMarca;
+            //traer datos de falla, repuesto
+            $eqAcc = EquipoAccesorio::where('equipoaccesorio_ideq_foreign','=',$idEq)->get();           
+            $vectorAcc = array();
+            if (sizeof($eqAcc) != 0)
+            {               
+                foreach ($eqAcc as $eqa)
+                {                   
+                    $accesorio = Accesorio::find($eqa->equipoaccesorio_idacc_foreign);
+                    $vectorAcc[] = $accesorio->nombreAccesorio;
+                }
+            }
+            else
+            {
+                $vectorAcc[] = 'No se declararon';
+            };
+            $equipo['vectorAcc'] = $vectorAcc;
+        }
+        
+        return response()->json([
+                "msg"=>"Succes",
+                "orden"=>$orden,
+                "equipos"=>$equipos,
+                //"eqAcc"=>$eqAcc,
+                //"vectorAcc"=>$vectorAcc
+                ],200);                
+    }
+    /*{
         $idOrden = $request->idOrden;
         //$idOrden = 7;
         // buscar orden primero, para la orden buscar todos los telefonos
@@ -206,6 +249,6 @@ class AtPublicoController extends Controller
                 "orden"=>$orden,
                 "equipos"=>$equipos
                 ],200);                
-    }
+    }*/
 
 }
