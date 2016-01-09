@@ -16,6 +16,7 @@ use adminsel\Models\ServGama;
 use adminsel\Models\Equipo;
 use adminsel\Models\OrdenReparacion;
 use adminsel\Models\EquipoAccesorio;
+use adminsel\Models\EquipoFalla;
 
 class AtPublicoController extends Controller
 {
@@ -136,7 +137,21 @@ class AtPublicoController extends Controller
                 "fechaPres"=>$fechaPres
                 ],200);        
     }
+    //------------------------------------------
+    //------------------------------------------
+    //------------------------------------------
+    public function getGuardarPresupuesto(Request $request)
+    {
 
+        
+        return response()->json([
+                "msg"=>"Succes",
+                "costoMO"=>$costoMO,
+                "totalRep"=>$totalRep,
+                "totalServ"=>$totalServ,
+                "fechaPres"=>$fechaPres
+                ],200);  
+    }
     //------------------------------------------
     //------------------------------------------
     //------------------------------------------
@@ -199,7 +214,7 @@ class AtPublicoController extends Controller
             $equipo['gama'] = $gama->nombreGama;
             $equipo['modelo'] = $modelo->nombreModelo;
             $equipo['marca'] = $marca->nombreMarca;
-            //traer datos de falla, repuesto
+            //traer datos de falla, accesorios, repuesto
             $eqAcc = EquipoAccesorio::where('equipoaccesorio_ideq_foreign','=',$idEq)->get();           
             $vectorAcc = array();
             if (sizeof($eqAcc) != 0)
@@ -215,6 +230,25 @@ class AtPublicoController extends Controller
                 $vectorAcc[] = 'No se declararon';
             };
             $equipo['vectorAcc'] = $vectorAcc;
+
+            //--------------------------------
+
+            /*$eqFalla = EquipoFalla::where('equipofalla_ideq_foreign','=',$idEq)->get();           
+            $vectorFalla = array();
+            if (sizeof($eqFalla) != 0)
+            {               
+                foreach ($eqFalla as $eqfa)
+                {                   
+                    $fallasgen = FallaGenerica::find($eqfa->equipoaccesorio_idfallaGen_foreign);
+                    $vectorFalla[] = $fallasgen->descripcionFallaGen;
+                }
+            }
+            else
+            {
+                $vectorFalla[] = 'No se declararon';
+            };
+            $equipo['vectorFalla'] = $vectorFalla;*/
+
         }
         
         return response()->json([

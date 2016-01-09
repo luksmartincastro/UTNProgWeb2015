@@ -49,6 +49,7 @@ Route::get('AtPublicoIndex','AtPublicoController@index');
 Route::post('getModelos','AtPublicoController@getModelos');
 Route::post('getRepuestos','AtPublicoController@getRepuestos');
 Route::post('getPresupuesto','AtPublicoController@getPresupuesto');
+Route::post('GuardarPresupuesto','AtPublicoController@getGuardarPresupuesto');
 
 Route::get('Recepcion','AtPublicoController@recepcion');
 
