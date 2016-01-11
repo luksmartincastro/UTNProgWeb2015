@@ -4,21 +4,21 @@ namespace adminsel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FallaGenerica extends Model 
+class ServEquipo extends Model 
 {    
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'fallagenerica';
+    protected $table = 'servequipo';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['descripcionFallaGen'];
+    protected $fillable = [];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -29,10 +29,20 @@ class FallaGenerica extends Model
 	
 	//-----------------------------------------------------
 	//--------------------- metodos -----------------------
-	//-----------------------------------------------------
+	//-----------------------------------------------------	
 
-	public function equipos()
-    {        
-        return $this->hasMany('adminsel\Models\EquipoFalla','equipofalla_idfallaGen_foreign');
-    }
+    public function equipo()
+	{
+		return $this->belongsTo('adminsel\Models\Equipo'); 
+	}
+
+	//-----------------------------------------
+
+	public function servicio()
+	{
+		return $this->belongsTo('adminsel\Models\Servicio'); 
+	}
+
+	//-----------------------------------------
+
 }

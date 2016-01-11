@@ -31,14 +31,14 @@ class EquipoAccesorio extends Model
 	//--------------------- metodos -----------------------
 	//-----------------------------------------------------
 
-    /*public function equipo()
+    public function equipo()
     {
-        return $this->belongsTo('Equipo'); 
-    }*/
+        return $this->belongsTo('adminsel\Models\Equipo'); 
+    }
     //-----------------------------------------
     public function accesorio()
     {
-        return $this->belongsTo('Accesorio'); 
+        return $this->belongsTo('adminsel\Models\Accesorio'); 
     }
     //-----------------------------------------
 }

@@ -33,7 +33,7 @@ class EquipoFalla extends Model
 
     public function equipo()
     {
-        return $this->belongsTo('Equipo'); 
+        return $this->belongsTo('adminsel\Models\Equipo'); 
     }
     //-----------------------------------------
 }

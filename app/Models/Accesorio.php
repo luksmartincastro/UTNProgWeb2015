@@ -33,6 +33,6 @@ class Accesorio extends Model
 
     public function equipos()
     {
-        return $this->hasMany('EquipoAccesorio','equipoaccesorio _idacc_foreign');
+        return $this->hasMany('adminsel\Models\EquipoAccesorio','equipoaccesorio _idacc_foreign');
     }
 }

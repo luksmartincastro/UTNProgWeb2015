@@ -31,12 +31,12 @@ class Servicio extends Model
     //------------------------------------------
 	public function equipos()
     {
-        return $this->hasMany('ServEquipo','servequipo_idserv_foreign');
+        return $this->hasMany('adminsel\Models\ServEquipo','servequipo_idserv_foreign');
     }
     //------------------------------------------
     public function gamas()
     {
-        return $this->hasMany('ServGama','servgama_idserv_foreign');
+        return $this->hasMany('adminsel\Models\ServGama','servgama_idserv_foreign');
     }
     //-----------------------------------------
     public function selconfig()

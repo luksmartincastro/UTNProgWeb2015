@@ -51,7 +51,7 @@ class Equipo extends Model
     //-----------------------------------------
     public function servicios()
     {
-        return $this->hasMany('ServEquipo','servequipo_ideq_foreign');  
+        return $this->hasMany('adminsel\Models\ServEquipo','servequipo_ideq_foreign');  
     }
     //-----------------------------------------
     /*public function empleados()
@@ -61,21 +61,21 @@ class Equipo extends Model
     //-----------------------------------------
     public function accesorios()
     {
-        return $this->hasMany('EquipoAccesorio','equipoaccesorio_ideq_foreign'); 
+        return $this->hasMany('adminsel\Models\EquipoAccesorio','equipoaccesorio_ideq_foreign');
     }
     //-----------------------------------------
     public function fallas()
     {
-        return $this->hasMany('EquipoFalla','equipofalla_ideq_foreign'); 
+        return $this->hasMany('adminsel\Models\EquipoFalla','equipofalla_ideq_foreign'); 
     }   
     //-----------------------------------------
-    /*public function historiales()
+    public function historiales()
     {
-        return $this->hasMany('Historial','historial_ideq_foreign'); 
-    }*/
+        return $this->hasMany('adminsel\Models\Historial','historial_ideq_foreign'); 
+    }
     //-----------------------------------------
     public function repuestos()
     {
-        return $this->hasMany('EquipoRepuesto','equiporepuesto_ideq_foreign'); 
+        return $this->hasMany('adminsel\Models\EquipoRepuesto','equiporepuesto_ideq_foreign'); 
     }
 }

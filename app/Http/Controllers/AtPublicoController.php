@@ -10,6 +10,7 @@ use adminsel\Models\Modelo;
 use adminsel\Models\Accesorio;
 use adminsel\Models\FallaGenerica;
 use adminsel\Models\Servicio;
+use adminsel\Models\ServEquipo;
 use adminsel\Models\SelConfig;
 use adminsel\Models\Repuesto;
 use adminsel\Models\ServGama;
@@ -17,6 +18,8 @@ use adminsel\Models\Equipo;
 use adminsel\Models\OrdenReparacion;
 use adminsel\Models\EquipoAccesorio;
 use adminsel\Models\EquipoFalla;
+use adminsel\Models\Historial;
+
 
 class AtPublicoController extends Controller
 {
@@ -142,15 +145,110 @@ class AtPublicoController extends Controller
     //------------------------------------------
     public function getGuardarPresupuesto(Request $request)
     {
+        // se deben validar los datos de la orden 
+        $datosOrden = $request->datosOrden;// datos de la orden a guardar
+        $arrayEq = $request->arrayEq;// validar los datos del equipo
+       
+        //var_dump($arrayEq);        
 
+        $orden = new OrdenReparacion;
+        $orden->apeNom = $datosOrden['apenom'];
+        $orden->telefono = $datosOrden['telefono'];
+        $orden->anticipo = $datosOrden['anticipo'];
+        $orden->observacion = $datosOrden['observacion'];
+        $orden->save();        
+        // guardar cada equipo del arrayEq 
+        if ( sizeof($arrayEq) != 0) 
+        {
+            foreach ($arrayEq as $eq)
+            {                
+                $equipo = new Equipo;                               
+                $equipo->imei = $eq['imei'];
+                $equipo->fechaEntrega = $eq['fechaEst'];
+                $equipo->estadoReparacion = 'PENDIENTE';// listo..   CON DEMORA
+                $equipo->estadoGarantia = 'PENDIENTE';// SI ...NO..
+                $equipo->estadoPago = 'PENDIENTE'; // PAGADO.. PENDIENTE
+                $equipo->presupEstimado = (int) $eq['presupEst'];
+                $equipo->presupFinal = 0;
+                $equipo->save();                
+                //----guardamos la relacion con la orden de reparacion----                              
+                $orden = OrdenReparacion::find($orden->id);                
+                $equipo = $orden->equipos()->save($equipo);
+                 //----guardamos la relacion con gama----
+                $idGama = $eq['idGama']; //Input::get('valorIdGama');
+                if ($idGama != 0) 
+                {
+                    $gama = Gama::find($idGama);
+                    $equipo = $gama->equipos()->save($equipo);
+                }
+                 //----guardamos la relacion con modelo----
+                $idMod = $eq['idModelo'];// Input::get('valorIdMod');
+                if ($idMod != 0)
+                {
+                    $modelo = Modelo::find($idMod);
+                    $equipo = $modelo->equipos()->save($equipo);
+                }         
+                //--------creamos y guardamos empleadoequipo-------
+                /*$idEmpleado = Auth::user()->get()->id;              
+                $empl = Empleado::find($idEmpleado);                
+                $empEq = new EmpleadoEquipo;
+                $empEq->save();             
+                $empEq = $empl->equipos()->save($empEq);            
+                $empEq = $equipo->empleados()->save($empEq);     */
+
+                //--------creamos y guardamos equipohistorial-------                
+                $hist = new Historial;
+                $hist->evento = 'ENTRADA NORMAL';// ENTRADA GARANTIA.. SALIDA LISTO.. SALIDA SIN REPARAR                                
+                $hist->descripcionFalla = $eq['descripFalla']; //Input::get('descripFalla');
+                $hist->save();
+                $hist = $equipo->historiales()->save($hist);                
+                //-------guardar las fallas genericas---------------
+                $vectorFG = $eq['vectorFalla'];
+                //var_dump($vectorFG);
+                if ( sizeof($vectorFG) != 0) // si tiene fallas declaradas 
+                {
+                    foreach ($vectorFG as $idFG) {
+                        //var_dump('dentro del foreach de fallas');     
+                        $FG = FallaGenerica::find($idFG);
+                        $eqFalla = new EquipoFalla;
+                        $eqFalla->save();
+                        $eqFalla = $equipo->fallas()->save($eqFalla);
+                        $eqFalla = $FG->equipos()->save($eqFalla);                  
+                    }               
+                }
+                //-------guardar los servicios----------------------
+                $vectorS = $eq['vectorServ'];
+                //var_dump($vectorS);
+                if ( sizeof($vectorS) != 0) // si tiene servicios declarados
+                {
+                    foreach ($vectorS as $idS) {
+                        //var_dump('dentro del foreach de servicios');                          
+                        $S = Servicio::find($idS);
+                        $serveq = new ServEquipo;
+                        $serveq->save();
+                        $serveq = $equipo->servicios()->save($serveq);
+                        $serveq = $S->equipos()->save($serveq);                 
+                    }               
+                }
+                //---------guardar accesorios--------------------
+                $vectorAcc = $eq['vectorAcc'];
+                //var_dump($vectorAcc);
+                if ( sizeof($vectorAcc) != 0) // si tiene servicios declarados
+                {
+                    foreach ($vectorAcc as $idAcc) {
+                        //var_dump('dentro del foreach de accesorios');     
+                        $A = Accesorio::find($idAcc);
+                        $eqAcc = new EquipoAccesorio;
+                        $eqAcc->save();
+                        $eqAcc = $equipo->accesorios()->save($eqAcc);
+                        $eqAcc = $A->equipos()->save($eqAcc);                   
+                    }               
+                }
+                //----------
+            }           
+        }  
         
-        return response()->json([
-                "msg"=>"Succes",
-                "costoMO"=>$costoMO,
-                "totalRep"=>$totalRep,
-                "totalServ"=>$totalServ,
-                "fechaPres"=>$fechaPres
-                ],200);  
+        return response()->json(["msg"=>"Succes"],200);  
     }
     //------------------------------------------
     //------------------------------------------
@@ -233,13 +331,13 @@ class AtPublicoController extends Controller
 
             //--------------------------------
 
-            /*$eqFalla = EquipoFalla::where('equipofalla_ideq_foreign','=',$idEq)->get();           
+            $eqFalla = EquipoFalla::where('equipofalla_ideq_foreign','=',$idEq)->get();           
             $vectorFalla = array();
             if (sizeof($eqFalla) != 0)
             {               
                 foreach ($eqFalla as $eqfa)
                 {                   
-                    $fallasgen = FallaGenerica::find($eqfa->equipoaccesorio_idfallaGen_foreign);
+                    $fallasgen = FallaGenerica::find($eqfa->equipofalla_idfallaGen_foreign);
                     $vectorFalla[] = $fallasgen->descripcionFallaGen;
                 }
             }
@@ -247,7 +345,7 @@ class AtPublicoController extends Controller
             {
                 $vectorFalla[] = 'No se declararon';
             };
-            $equipo['vectorFalla'] = $vectorFalla;*/
+            $equipo['vectorFalla'] = $vectorFalla;
 
         }
         

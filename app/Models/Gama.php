@@ -31,12 +31,12 @@ class Gama extends Model
     //------------------------------------------
 	public function modelos()
 	{
-		return $this->hasMany('Modelo','modelo_idmarca_foreign');
+		return $this->hasMany('adminsel\Models\Modelo','modelo_idmarca_foreign');
 	}
     //------------------------------------------
     public function servicios()
     {
-        return $this->hasMany('ServGama','servgama_idgam_foreign');
+        return $this->hasMany('adminsel\Models\ServGama','servgama_idgam_foreign');
     }
     //-----------------------------------------
     public function selconfig()
@@ -46,6 +46,6 @@ class Gama extends Model
     //-----------------------------------------
     public function equipos()
     {
-        return $this->hasMany('Equipo','equipo_idGama_foreign');
+        return $this->hasMany('adminsel\Models\Equipo','equipo_idGama_foreign');
     }
 }
