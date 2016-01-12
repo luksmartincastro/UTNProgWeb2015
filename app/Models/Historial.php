@@ -4,21 +4,21 @@ namespace adminsel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EquipoRepuesto extends Model 
+class Historial extends Model 
 {    
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'equiporepuesto';
+    protected $table = 'historial';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['evento','descripcionFalla'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -27,18 +27,12 @@ class EquipoRepuesto extends Model
      */
     protected $hidden = [];
 	
-	//------------------------------------------
-    //------------- metodos --------------------
-    //------------------------------------------
+	//-----------------------------------------------------
+	//--------------------- metodos -----------------------
+	//-----------------------------------------------------
 
     public function equipo()
     {
         return $this->belongsTo('adminsel\Models\Equipo'); 
     }
-    //-----------------------------------------
-    public function repuesto()
-    {
-        return $this->belongsTo('adminsel\Models\Repuesto');  
-    }
-    //-----------------------------------------
 }

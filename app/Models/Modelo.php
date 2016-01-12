@@ -40,5 +40,11 @@ class Modelo extends Model
     {
         return $this->hasMany('adminsel\Models\Repuesto','repuesto_idmod_foreign');
     }
+    //-----------------------------------------
+    public function equipos()
+    {
+        return $this->hasMany('adminsel\Models\Equipo','equipo_idMod_foreign');
+    }
+    //-----------------------------------------
 }
 
