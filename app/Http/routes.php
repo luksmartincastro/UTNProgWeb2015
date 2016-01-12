@@ -43,6 +43,11 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset'); 
 */
 //----------------------------------------------------------------------
+//-----------------------PdfController----------------------------
+//----------------------------------------------------------------------
+Route::get('imprimirOrdenRep','PdfController@imprimirOrdenRep');
+
+//----------------------------------------------------------------------
 //-----------------------AtPublicoController----------------------------
 //----------------------------------------------------------------------
 Route::get('AtPublicoIndex','AtPublicoController@index');
