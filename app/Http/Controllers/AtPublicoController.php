@@ -354,7 +354,7 @@ class AtPublicoController extends Controller
             {               
                 foreach ($eqFalla as $eqfa)
                 {                   
-                    $fallasgen = FallaGenerica::find($eqfa->equipofalla_idfallaGen_foreign);
+                    $fallasgen = FallaGenerica::find($eqfa->equipofalla_idfallaGen_foreign); 
                     $vectorFalla[] = $fallasgen->descripcionFallaGen;
                 }
             }

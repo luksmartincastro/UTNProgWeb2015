@@ -7,7 +7,8 @@ use Illuminate\Support\Facades;
 
 //use adminsel\Http\Requests;
 use adminsel\Http\Controllers\Controller;
-//use PDF;
+use \PDF;
+//use \App;
 
 class PdfController extends Controller
 {
@@ -18,18 +19,18 @@ class PdfController extends Controller
      */
     public function imprimirOrdenRep()
     {
-        require_once(base_path()."/vendor/dompdf/dompdf/dompdf_config.inc.php"); 
+        //require_once(base_path()."/vendor/dompdf/dompdf/dompdf_config.inc.php"); 
         //-------------
-        /*$pdf = PDF::loadView('Reportes.ordenReparacion')->setPaper('a4')->setOrientation('landscape');              
+        $pdf = PDF::loadView('Reportes.reporte2')->setPaper('a4')->setOrientation('landscape');              
         return $pdf->stream();
 
         /*$view =  \View::make('pdf.invoice', compact('data', 'date', 'invoice'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->stream('invoice');*/
-        $pdf = App::make('dompdf.wrapper');
+        /*$pdf = App::make('dompdf.wrapper');
         $pdf->loadHTML('<h1>Test</h1>');
-        return $pdf->stream();
+        return $pdf->stream();*/
     }
 
     
