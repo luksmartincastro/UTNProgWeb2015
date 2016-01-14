@@ -8,7 +8,7 @@
     <!-- Bootstrap -->
     
     
-    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -26,7 +26,7 @@
     
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <table class="table table-striped">
+    <table class="table table-striped" border="1">
       <tr>
         <td>1</td>
         <td>-</td> 
