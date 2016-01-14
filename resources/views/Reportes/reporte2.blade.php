@@ -1,55 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Orden de reparacion</title>
+    <title>Orden de reparacion</title>    
 
-    <!-- Bootstrap -->
-    
-    
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <style type="text/css">
+      * {
+        margin:5;
+        padding:0;
+      }
+      
+      body
+      {
+        font:14px Georgia, serif;
+      }
+      
+      td{
+         border:1px solid #ccc;
+         padding:10px;
+      }
+      
+      .tblContenedor
+      {
+        width: 100%;         
+        border: 1px solid black;
+      }
+
+      .filaEncabezado
+      {
+        padding: 15px;
+        text-align: center;
+      }
+      
+      .filaDetalle
+      {
+        text-align: center;        
+      }
+
+      
+    </style>
+
+
   </head>
-  <body>
-
-    <div class="row">
-      <div class="col-md-4">.col-md-4</div>
-      <div class="col-md-4"><h1>Orden de reparacion</h1></div>
-      <div class="col-md-4">.col-md-4</div>
-    </div>
+  <body> 
     
+    <table class="tblContenedor">      
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <table class="table table-striped" border="1">
+      <tr class="filaEncabezado">
+        <!-- ///////////////////////////////////////////////////// -->
+        <td>
+        <strong>ORDEN DE REPARACION - 00000</strong>
+        
+        <table class="tblContenedor">                       
+            <tr>
+              <td>SEL-Servicio tecnico multimarca</td>
+              <td>fecha: 00/00/00</td>              
+            </tr>
+            <tr>
+              <td>CUIT:</td>
+              <td>00-00000000-0</td>              
+            </tr>
+            <tr>
+              <td>Direccion:</td>
+              <td>mendoza 1787</td>              
+            </tr>
+            <tr>
+              <td>Telefono:</td>
+              <td>381-4324973</td>              
+            </tr>
+          </table>
+
+        </td>        
+        <!-- ///////////////////////////////////////////////////// -->
+        <td>
+        <strong>ORDEN DE REPARACION - 00000</strong>
+        
+        <table class="tblContenedor">                       
+            <tr>
+              <td>SEL-Servicio tecnico multimarca</td>
+              <td>fecha: 00/00/00</td>              
+            </tr>
+            <tr>
+              <td>CUIT:</td>
+              <td>00-00000000-0</td>              
+            </tr>
+            <tr>
+              <td>Direccion:</td>
+              <td>mendoza 1787</td>              
+            </tr>
+            <tr>
+              <td>Telefono:</td>
+              <td>381-4324973</td>              
+            </tr>
+          </table>
+
+        </td>        
+      </tr>
+      <!-- ////////////////////////////////////////////////////////////// -->
+      <!-- /////////////////////DETALLE DE EQUIPO//////////////////////// -->
+      <!-- ////////////////////////////////////////////////////////////// -->
       <tr>
-        <td>1</td>
-        <td>-</td> 
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
+        <td class="filaDetalle"><!-- ///////////////// -->      
+        <strong>DETALLE DEL EQUIPO</strong>
+          <table class="tblContenedor">                       
+            <tr>
+              <td>Apellido y nombre:</td>
+              <td>Juan Roman Riquelme</td>              
+            </tr>
+            <tr>
+              <td>Telefonoo de contacto:</td>
+              <td>381-6408757</td>              
+            </tr>
+            <tr>
+              <td>Presupuesto estimado $000</td>
+              <td>Anticipo $0000</td>              
+            </tr>            
+          </table>
+
+        </td> <!-- ///////////////// -->      
+        <td class="filaDetalle"><!-- ///////////////// -->      
+          <strong>DETALLE DEL EQUIPO</strong>
+          <table class="tblContenedor">                       
+            <tr>
+              <td>Apellido y nombre:</td>
+              <td>Juan Roman Riquelme</td>              
+            </tr>
+            <tr>
+              <td>Telefonoo de contacto:</td>
+              <td>381-6408757</td>              
+            </tr>
+            <tr>
+              <td>Presupuesto estimado $000</td>
+              <td>Anticipo $0000</td>              
+            </tr>            
+          </table>
+
+        </td><!-- ///////////////// -->              
+      </tr>
+      <!-- ////////////////////////////////////////////////////////////// -->
+      <!-- /////////////////////DETALLE DE EQUIPO//////////////////////// -->
+      <!-- ////////////////////////////////////////////////////////////// -->
+      <tr>
+        <td class="filaDetalle"><!-- ///////////////// -->      
+        <strong>DETALLE DEL EQUIPO</strong>
+          <table class="tblContenedor">                       
+            <tr>
+              <td>Apellido y nombre:</td>
+              <td>Juan Roman Riquelme</td>              
+            </tr>
+            <tr>
+              <td>Telefonoo de contacto:</td>
+              <td>381-6408757</td>              
+            </tr>
+            <tr>
+              <td>Presupuesto estimado $000</td>
+              <td>Anticipo $0000</td>              
+            </tr>            
+          </table>
+
+        </td> <!-- ///////////////// -->      
+        <td class="filaDetalle"><!-- ///////////////// -->      
+          <strong>DETALLE DEL EQUIPO</strong>
+          <table class="tblContenedor">                       
+            <tr>
+              <td>Apellido y nombre:</td>
+              <td>Juan Roman Riquelme</td>              
+            </tr>
+            <tr>
+              <td>Telefonoo de contacto:</td>
+              <td>381-6408757</td>              
+            </tr>
+            <tr>
+              <td>Presupuesto estimado $000</td>
+              <td>Anticipo $0000</td>              
+            </tr>            
+          </table>
+
+        </td><!-- ///////////////// -->              
       </tr>
       <tr>
-        <td>2</td>
-        <td>-</td> 
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
+        <td>Pie de orden</td>
+        <td>Pie de orden</td>        
       </tr>
-    </table>
+    </table>    
    
   </body>
 </html>

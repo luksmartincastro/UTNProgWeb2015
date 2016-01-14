@@ -19,18 +19,16 @@ class PdfController extends Controller
      */
     public function imprimirOrdenRep()
     {
-        //require_once(base_path()."/vendor/dompdf/dompdf/dompdf_config.inc.php"); 
-        //-------------
+                
         $pdf = PDF::loadView('Reportes.reporte2')->setPaper('a4')->setOrientation('landscape');              
-        return $pdf->stream();
-
-        /*$view =  \View::make('pdf.invoice', compact('data', 'date', 'invoice'))->render();
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($view);
-        return $pdf->stream('invoice');*/
-        /*$pdf = App::make('dompdf.wrapper');
-        $pdf->loadHTML('<h1>Test</h1>');
-        return $pdf->stream();*/
+        return $pdf->stream();        
+    }
+    //-----------------------------------------
+    public function imprimirOrdenRep2()
+    {
+                
+        $pdf = PDF::loadView('Reportes.ReporteOrdenRep')->setPaper('a4')->setOrientation('landscape');              
+        return $pdf->stream();        
     }
 
     

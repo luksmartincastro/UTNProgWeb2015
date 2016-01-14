@@ -46,6 +46,7 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 //-----------------------PdfController----------------------------
 //----------------------------------------------------------------------
 Route::get('imprimirOrdenRep','PdfController@imprimirOrdenRep');
+Route::get('imprimirOrdenRep2','PdfController@imprimirOrdenRep2');
 
 //----------------------------------------------------------------------
 //-----------------------AtPublicoController----------------------------
