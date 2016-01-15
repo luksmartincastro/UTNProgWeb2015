@@ -1,14 +1,13 @@
-<?php
-
-namespace adminsel\Http\Controllers;
+<?php namespace adminsel\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades;
 
-//use adminsel\Http\Requests;
+use adminsel\Http\Requests;
 use adminsel\Http\Controllers\Controller;
 use \PDF;
-//use \App;
+
 
 class PdfController extends Controller
 {
@@ -17,8 +16,9 @@ class PdfController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function imprimirOrdenRep()
+    public function imprimirOrdenRep(Requests $request)
     {
+        $idOrden = $request->idOrden;
         $parameter['apenom'] = 'Lucas Martin castro';        
         $pdf = PDF::loadView('Reportes.reporte2',$parameter)->setPaper('a4')->setOrientation('landscape');              
         return $pdf->stream();        

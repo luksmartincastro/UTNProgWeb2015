@@ -252,7 +252,7 @@ class AtPublicoController extends Controller
                 {
                     foreach ($vectorRep as $Rep) {
                         //var_dump('dentro del foreach de repuestos');  
-                        var_dump($Rep['id']);    
+                        //var_dump($Rep['id']);    
                         $rep = Repuesto::find($Rep['id']);  
                         //var_dump($rep);
                         $eqRep = new EquipoRepuesto;
