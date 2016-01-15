@@ -265,7 +265,7 @@ class AtPublicoController extends Controller
             }           
         }  
         
-        return response()->json(["msg"=>"Succes"],200);  
+        return response()->json(["msg"=>"Succes",'ultimoIdOrden'=>$orden->id],200);  
     }
     //------------------------------------------
     //------------------------------------------

@@ -19,15 +19,15 @@ class PdfController extends Controller
      */
     public function imprimirOrdenRep()
     {
-                
-        $pdf = PDF::loadView('Reportes.reporte2')->setPaper('a4')->setOrientation('landscape');              
+        $parameter['apenom'] = 'Lucas Martin castro';        
+        $pdf = PDF::loadView('Reportes.reporte2',$parameter)->setPaper('a4')->setOrientation('landscape');              
         return $pdf->stream();        
     }
     //-----------------------------------------
     public function imprimirOrdenRep2()
     {
                 
-        $pdf = PDF::loadView('Reportes.ReporteOrdenRep')->setPaper('a4')->setOrientation('landscape');              
+        $pdf = PDF::loadView('Reportes.ReporteOrdenRep',$parameter)->setPaper('a4')->setOrientation('landscape');              
         return $pdf->stream();        
     }
 

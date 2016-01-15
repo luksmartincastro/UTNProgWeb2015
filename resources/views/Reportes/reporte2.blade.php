@@ -4,8 +4,11 @@
     <title>Orden de reparacion</title>    
 
     <style type="text/css">
-      * {
-        margin:5;
+      * {        
+        margin-top: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 5px;
         padding:0;
       }
       
@@ -96,15 +99,15 @@
         </td>        
       </tr>
       <!-- ////////////////////////////////////////////////////////////// -->
-      <!-- /////////////////////DETALLE DE EQUIPO//////////////////////// -->
+      <!-- /////////////////////DATOS DEL CLIENTE//////////////////////// -->
       <!-- ////////////////////////////////////////////////////////////// -->
       <tr>
         <td class="filaDetalle"><!-- ///////////////// -->      
-        <strong>DETALLE DEL EQUIPO</strong>
+        <strong>DATOS DEL CLIENTE</strong>
           <table class="tblContenedor">                       
             <tr>
               <td>Apellido y nombre:</td>
-              <td>Juan Roman Riquelme</td>              
+              <td>{{$apenom}}</td>              
             </tr>
             <tr>
               <td>Telefonoo de contacto:</td>
@@ -116,9 +119,10 @@
             </tr>            
           </table>
 
-        </td> <!-- ///////////////// -->      
+        </td>
+        <!-- ///////////////// -->      
         <td class="filaDetalle"><!-- ///////////////// -->      
-          <strong>DETALLE DEL EQUIPO</strong>
+          <strong>DATOS DEL CLIENTE</strong>
           <table class="tblContenedor">                       
             <tr>
               <td>Apellido y nombre:</td>
@@ -144,17 +148,29 @@
         <strong>DETALLE DEL EQUIPO</strong>
           <table class="tblContenedor">                       
             <tr>
-              <td>Apellido y nombre:</td>
-              <td>Juan Roman Riquelme</td>              
+              <td>Marca: Motorola</td>
+              <td>Fecha entrega: 00/00/00</td>              
             </tr>
             <tr>
-              <td>Telefonoo de contacto:</td>
-              <td>381-6408757</td>              
+              <td>Modelo: Moto G</td>
+              <td></td>              
             </tr>
             <tr>
-              <td>Presupuesto estimado $000</td>
-              <td>Anticipo $0000</td>              
-            </tr>            
+              <td>IMEI:</td>
+              <td>00000-00000-00000</td>              
+            </tr>
+            <tr>
+              <td>Descrip falla:</td>
+              <td>Falla cuando recibe un mensaje - Falla cuando recibe un mensaje - Falla cuando recibe un mensaje</td>              
+            </tr>
+            <tr>
+              <td>Descrip servicio:</td>
+              <td>Falla cuando recibe un mensaje - Falla cuando recibe un mensaje - Falla cuando recibe un mensaje</td>              
+            </tr>        
+            <tr>
+              <td>Accesorio:</td>
+              <td>Falla cuando recibe un mensaje - Falla cuando recibe un mensaje - Falla cuando recibe un mensaje</td>              
+            </tr>     
           </table>
 
         </td> <!-- ///////////////// -->      
@@ -162,24 +178,54 @@
           <strong>DETALLE DEL EQUIPO</strong>
           <table class="tblContenedor">                       
             <tr>
-              <td>Apellido y nombre:</td>
-              <td>Juan Roman Riquelme</td>              
+              <td>Marca: Motorola</td>
+              <td>Fecha entrega: 00/00/00</td>              
             </tr>
             <tr>
-              <td>Telefonoo de contacto:</td>
-              <td>381-6408757</td>              
+              <td>Modelo: Moto G</td>
+              <td></td>              
             </tr>
             <tr>
-              <td>Presupuesto estimado $000</td>
-              <td>Anticipo $0000</td>              
+              <td>IMEI:</td>
+              <td>00000-00000-00000</td>              
+            </tr>
+            <tr>
+              <td>Descrip falla:</td>
+              <td>Falla cuando recibe un mensaje - Falla cuando recibe un mensaje - Falla cuando recibe un mensaje</td>              
+            </tr>
+            <tr>
+              <td>Descrip servicio:</td>
+              <td>Falla cuando recibe un mensaje - Falla cuando recibe un mensaje - Falla cuando recibe un mensaje</td>              
+            </tr>        
+            <tr>
+              <td>Accesorio:</td>
+              <td>Falla cuando recibe un mensaje - Falla cuando recibe un mensaje - Falla cuando recibe un mensaje</td>              
             </tr>            
           </table>
 
         </td><!-- ///////////////// -->              
       </tr>
+      <!-- ////////////////////////////////////////////////////////////// -->
+      <!-- /////////////////////DATOS DEL FOOTER///////////////////////// -->
+      <!-- ////////////////////////////////////////////////////////////// -->
       <tr>
-        <td>Pie de orden</td>
-        <td>Pie de orden</td>        
+        <td>        
+          <table class="tblContenedor">                       
+            <tr>
+              <td>Ud fue atendido por:</td>
+              <td>Juan Perez</td>              
+            </tr>            
+          </table>
+        </td>
+        <!-- ///////////////// -->
+        <td>        
+          <table class="tblContenedor">                       
+            <tr>
+              <td>Ud fue atendido por:</td>
+              <td>Juan Perez</td>              
+            </tr>            
+          </table>
+        </td>        
       </tr>
     </table>    
    
