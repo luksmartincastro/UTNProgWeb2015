@@ -19,7 +19,7 @@ use adminsel\Models\OrdenReparacion;
 use adminsel\Models\EquipoAccesorio;
 use adminsel\Models\EquipoFalla;
 use adminsel\Models\Historial; 
-use adminsel\Models\EquipoRepuesto;
+use adminsel\Models\EquipoRepuesto; 
 
 
 class AtPublicoController extends Controller

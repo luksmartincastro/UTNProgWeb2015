@@ -111,7 +111,7 @@
             </tr>
             <tr>
               <td>Telefonoo de contacto:</td>
-              <td>381-6408757</td>              
+              <td>381-6408757 {{$telContac}}</td>              
             </tr>
             <tr>
               <td>Presupuesto estimado $000</td>
