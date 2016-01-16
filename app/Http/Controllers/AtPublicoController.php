@@ -11,7 +11,7 @@ use adminsel\Models\Accesorio;
 use adminsel\Models\FallaGenerica;
 use adminsel\Models\Servicio;
 use adminsel\Models\ServEquipo;
-use adminsel\Models\SelConfig;
+use adminsel\Models\SelConfig; 
 use adminsel\Models\Repuesto;
 use adminsel\Models\ServGama;
 use adminsel\Models\Equipo;
@@ -155,6 +155,7 @@ class AtPublicoController extends Controller
         $orden = new OrdenReparacion;
         $orden->apeNom = $datosOrden['apenom'];
         $orden->telefono = $datosOrden['telefono'];
+        $orden->domicilio = $datosOrden['domicilio'];
         $orden->anticipo = $datosOrden['anticipo'];
         $orden->observacion = $datosOrden['observacion'];
         $orden->save();        

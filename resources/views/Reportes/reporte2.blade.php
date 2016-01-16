@@ -46,53 +46,60 @@
   </head>
   <body> 
     
+    <?php 
+    foreach($parameter as $parameter)
+    {  
+    ?>
+    <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
     <table class="tblContenedor">      
 
       <tr class="filaEncabezado">
         <!-- ///////////////////////////////////////////////////// -->
         <td>
-        <strong>ORDEN DE REPARACION - 00000</strong>
+        <strong>SEL-Servicio tecnico multimarca</strong>
         
         <table class="tblContenedor">                       
             <tr>
-              <td>SEL-Servicio tecnico multimarca</td>
-              <td>fecha: 00/00/00</td>              
+              <td>Orden - 0{{$numOr}}</td>
+              <td>fecha: {{$fecha}}</td>              
             </tr>
             <tr>
               <td>CUIT:</td>
-              <td>00-00000000-0</td>              
+              <td>{{$cuit}}</td>              
             </tr>
             <tr>
               <td>Direccion:</td>
-              <td>mendoza 1787</td>              
+              <td>{{$direc}}</td>              
             </tr>
             <tr>
               <td>Telefono:</td>
-              <td>381-4324973</td>              
+              <td>{{$tel}}</td>              
             </tr>
           </table>
 
         </td>        
         <!-- ///////////////////////////////////////////////////// -->
         <td>
-        <strong>ORDEN DE REPARACION - 00000</strong>
+        <strong>SEL-Servicio tecnico multimarca</strong>
         
         <table class="tblContenedor">                       
             <tr>
-              <td>SEL-Servicio tecnico multimarca</td>
-              <td>fecha: 00/00/00</td>              
+              <td>Orden - 0{{$numOr}}</td>
+              <td>fecha: {{$fecha}}</td>              
             </tr>
             <tr>
               <td>CUIT:</td>
-              <td>00-00000000-0</td>              
+              <td>{{$cuit}}</td>              
             </tr>
             <tr>
               <td>Direccion:</td>
-              <td>mendoza 1787</td>              
+              <td>{{$direc}}</td>              
             </tr>
             <tr>
               <td>Telefono:</td>
-              <td>381-4324973</td>              
+              <td>{{$tel}}</td>              
             </tr>
           </table>
 
@@ -111,11 +118,15 @@
             </tr>
             <tr>
               <td>Telefonoo de contacto:</td>
-              <td>381-6408757 {{$telContac}}</td>              
+              <td>{{$telefono}}</td>              
             </tr>
             <tr>
-              <td>Presupuesto estimado $000</td>
-              <td>Anticipo $0000</td>              
+              <td>Domicilio:</td>
+              <td>{{$domicilio}}</td>              
+            </tr>
+            <tr>
+              <td>Cantidad Equipos: 0000</td>
+              <td>Anticipo ${{$anticipo}}</td>              
             </tr>            
           </table>
 
@@ -126,15 +137,19 @@
           <table class="tblContenedor">                       
             <tr>
               <td>Apellido y nombre:</td>
-              <td>Juan Roman Riquelme</td>              
+              <td>{{$apenom}}</td> 
             </tr>
             <tr>
               <td>Telefonoo de contacto:</td>
-              <td>381-6408757</td>              
+              <td>{{$telefono}}</td>              
             </tr>
             <tr>
-              <td>Presupuesto estimado $000</td>
-              <td>Anticipo $0000</td>              
+              <td>Domicilio:</td>
+              <td>{{$domicilio}}</td>              
+            </tr>
+            <tr>
+              <td>Cantidad Equipos: 0000</td>
+              <td>Anticipo ${{$anticipo}}</td>              
             </tr>            
           </table>
 
@@ -148,28 +163,32 @@
         <strong>DETALLE DEL EQUIPO</strong>
           <table class="tblContenedor">                       
             <tr>
-              <td>Marca: Motorola</td>
-              <td>Fecha entrega: 00/00/00</td>              
+              <td>Presup estimado ${{$presupEst}}</td>
+              <td>Fecha entrega: {{$fechaEntrega}}</td>              
             </tr>
             <tr>
-              <td>Modelo: Moto G</td>
-              <td></td>              
+              <td>Marca: {{$marca}}</td>
+              <td>Modelo: {{$modelo}}</td>
             </tr>
             <tr>
               <td>IMEI:</td>
-              <td>00000-00000-00000</td>              
+              <td>{{$imei}}</td>              
             </tr>
             <tr>
               <td>Descrip falla:</td>
-              <td>Falla cuando recibe un mensaje - Falla cuando recibe un mensaje - Falla cuando recibe un mensaje</td>              
+              <td>{{$descripFalla}}</td>              
             </tr>
             <tr>
               <td>Descrip servicio:</td>
-              <td>Falla cuando recibe un mensaje - Falla cuando recibe un mensaje - Falla cuando recibe un mensaje</td>              
-            </tr>        
+              <td>{{$servicio}}</td>              
+            </tr> 
+            <tr>
+              <td>Repuestos:</td>
+              <td>{{$repuesto}}</td>              
+            </tr>               
             <tr>
               <td>Accesorio:</td>
-              <td>Falla cuando recibe un mensaje - Falla cuando recibe un mensaje - Falla cuando recibe un mensaje</td>              
+              <td>{{$accesorio}}</td>              
             </tr>     
           </table>
 
@@ -178,28 +197,32 @@
           <strong>DETALLE DEL EQUIPO</strong>
           <table class="tblContenedor">                       
             <tr>
-              <td>Marca: Motorola</td>
-              <td>Fecha entrega: 00/00/00</td>              
+              <td>Presup estimado ${{$presupEst}}</td>
+              <td>Fecha entrega: {{$fechaEntrega}}</td>              
             </tr>
             <tr>
-              <td>Modelo: Moto G</td>
-              <td></td>              
+              <td>Marca: {{$marca}}</td>
+              <td>Modelo: {{$modelo}}</td>
             </tr>
             <tr>
               <td>IMEI:</td>
-              <td>00000-00000-00000</td>              
+              <td>{{$imei}}</td>              
             </tr>
             <tr>
               <td>Descrip falla:</td>
-              <td>Falla cuando recibe un mensaje - Falla cuando recibe un mensaje - Falla cuando recibe un mensaje</td>              
+              <td>{{$descripFalla}}</td>              
             </tr>
             <tr>
               <td>Descrip servicio:</td>
-              <td>Falla cuando recibe un mensaje - Falla cuando recibe un mensaje - Falla cuando recibe un mensaje</td>              
+              <td>{{$servicio}}</td>              
+            </tr>
+            <tr>
+              <td>Repuestos:</td>
+              <td>{{$repuesto}}</td>              
             </tr>        
             <tr>
               <td>Accesorio:</td>
-              <td>Falla cuando recibe un mensaje - Falla cuando recibe un mensaje - Falla cuando recibe un mensaje</td>              
+              <td>{{$accesorio}}</td>              
             </tr>            
           </table>
 
@@ -227,7 +250,14 @@
           </table>
         </td>        
       </tr>
-    </table>    
+    </table>   
+    
+    <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <?php     
+    }  
+    ?>
+
    
   </body>
 </html>
