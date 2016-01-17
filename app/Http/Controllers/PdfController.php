@@ -19,7 +19,7 @@ use adminsel\Models\ServEquipo;
 use adminsel\Models\EquipoAccesorio;
 use adminsel\Models\Accesorio;
 use adminsel\Models\EquipoRepuesto; 
-use adminsel\Models\Repuesto;
+use adminsel\Models\Repuesto; 
 
 
 class PdfController extends Controller
@@ -36,9 +36,11 @@ class PdfController extends Controller
         $idOrden = (int)$request->idOrden; 
         
         $vectorEq = Equipo::where('equipo_idOrden_foreign', '=', $idOrden)->get();
+        $cantEq = sizeof($vectorEq);
         foreach ($vectorEq as $eq)
         {             
-            $parameter = array();   
+            $parameter = array();  
+            $parameter['cantEq'] = $cantEq; 
             //---- recuperar datos del negocio ----
             $sel = SELConfig::find(1);
             $parameter['cuit'] = $sel->cuit;
@@ -123,7 +125,7 @@ class PdfController extends Controller
         }
 
         
-        $pdf = PDF::loadView('Reportes.reporte2', ['parameter'=>$parametro])->setPaper('a4')->setOrientation('landscape');              
+        $pdf = PDF::loadView('Reportes.reporte2', ['parameters'=>$parametro])->setPaper('a4')->setOrientation('landscape');              
         return $pdf->stream('reporte2');               
     }
     //-----------------------------------------

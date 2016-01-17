@@ -5,10 +5,7 @@
 
     <style type="text/css">
       * {        
-        margin-top: 30px;
-        margin-left: 5px;
-        margin-right: 5px;
-        margin-bottom: 5px;
+        margin: 0px;        
         padding:0;
       }
       
@@ -24,7 +21,41 @@
       
       .tblContenedor
       {
-        width: 100%;         
+        margin-top: 70px;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 40px;        
+        width: 100%; 
+        border: 1px solid black;
+      }
+
+      .tblContEncabezado
+      {
+        margin-top: 25px;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 20px;        
+        width: 100%; 
+        border: 1px solid black;
+      }
+
+      .tblContCliente
+      {
+        margin-top: 25px;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 20px;        
+        width: 100%; 
+        border: 1px solid black;
+      }
+
+      .tblContEquipo
+      {
+        margin-top: 25px;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 20px;        
+        width: 100%; 
         border: 1px solid black;
       }
 
@@ -47,7 +78,7 @@
   <body> 
     
     <?php 
-    foreach($parameter as $parameter)
+    foreach($parameters as $parameter)
     {  
     ?>
     <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -60,22 +91,22 @@
         <td>
         <strong>SEL-Servicio tecnico multimarca</strong>
         
-        <table class="tblContenedor">                       
+        <table class="tblContEncabezado">                       
             <tr>
-              <td>Orden - 0{{$numOr}}</td>
-              <td>fecha: {{$fecha}}</td>              
+              <td>Orden - 0<?php echo $parameter['numOr']; ?></td>
+              <td>fecha: <?php echo $parameter['fecha']; ?></td>              
             </tr>
             <tr>
               <td>CUIT:</td>
-              <td>{{$cuit}}</td>              
+              <td><?php echo $parameter['cuit']; ?></td>              
             </tr>
             <tr>
               <td>Direccion:</td>
-              <td>{{$direc}}</td>              
+              <td><?php echo $parameter['direc']; ?></td>              
             </tr>
             <tr>
               <td>Telefono:</td>
-              <td>{{$tel}}</td>              
+              <td><?php echo $parameter['tel']; ?></td>              
             </tr>
           </table>
 
@@ -84,22 +115,22 @@
         <td>
         <strong>SEL-Servicio tecnico multimarca</strong>
         
-        <table class="tblContenedor">                       
+        <table class="tblContEncabezado">                       
             <tr>
-              <td>Orden - 0{{$numOr}}</td>
-              <td>fecha: {{$fecha}}</td>              
+              <td>Orden - 00<?php echo $parameter['numOr']; ?></td>
+              <td>fecha: <?php echo $parameter['fecha']; ?></td>              
             </tr>
             <tr>
               <td>CUIT:</td>
-              <td>{{$cuit}}</td>              
+              <td><?php echo $parameter['cuit']; ?></td>              
             </tr>
             <tr>
               <td>Direccion:</td>
-              <td>{{$direc}}</td>              
+              <td><?php echo $parameter['direc']; ?></td>              
             </tr>
             <tr>
               <td>Telefono:</td>
-              <td>{{$tel}}</td>              
+              <td><?php echo $parameter['tel']; ?></td>              
             </tr>
           </table>
 
@@ -111,22 +142,22 @@
       <tr>
         <td class="filaDetalle"><!-- ///////////////// -->      
         <strong>DATOS DEL CLIENTE</strong>
-          <table class="tblContenedor">                       
+          <table class="tblContCliente">                       
             <tr>
               <td>Apellido y nombre:</td>
-              <td>{{$apenom}}</td>              
+              <td><?php echo $parameter['apenom']; ?></td>              
             </tr>
             <tr>
               <td>Telefonoo de contacto:</td>
-              <td>{{$telefono}}</td>              
+              <td><?php echo $parameter['telefono']; ?></td>              
             </tr>
             <tr>
               <td>Domicilio:</td>
-              <td>{{$domicilio}}</td>              
+              <td><?php echo $parameter['domicilio']; ?></td>              
             </tr>
             <tr>
-              <td>Cantidad Equipos: 0000</td>
-              <td>Anticipo ${{$anticipo}}</td>              
+              <td>Cantidad Equipos: <?php echo $parameter['cantEq']; ?></td>
+              <td>Anticipo $<?php echo $parameter['anticipo']; ?></td>              
             </tr>            
           </table>
 
@@ -134,22 +165,22 @@
         <!-- ///////////////// -->      
         <td class="filaDetalle"><!-- ///////////////// -->      
           <strong>DATOS DEL CLIENTE</strong>
-          <table class="tblContenedor">                       
+          <table class="tblContCliente">                       
             <tr>
               <td>Apellido y nombre:</td>
-              <td>{{$apenom}}</td> 
+              <td><?php echo $parameter['apenom']; ?></td> 
             </tr>
             <tr>
               <td>Telefonoo de contacto:</td>
-              <td>{{$telefono}}</td>              
+              <td><?php echo $parameter['telefono']; ?></td>              
             </tr>
             <tr>
               <td>Domicilio:</td>
-              <td>{{$domicilio}}</td>              
+              <td><?php echo $parameter['domicilio']; ?></td>              
             </tr>
             <tr>
-              <td>Cantidad Equipos: 0000</td>
-              <td>Anticipo ${{$anticipo}}</td>              
+              <td>Cantidad Equipos: <?php echo $parameter['cantEq']; ?></td>
+              <td>Anticipo $<?php echo $parameter['anticipo']; ?></td>              
             </tr>            
           </table>
 
@@ -161,68 +192,68 @@
       <tr>
         <td class="filaDetalle"><!-- ///////////////// -->      
         <strong>DETALLE DEL EQUIPO</strong>
-          <table class="tblContenedor">                       
+          <table class="tblContEquipo">                       
             <tr>
-              <td>Presup estimado ${{$presupEst}}</td>
-              <td>Fecha entrega: {{$fechaEntrega}}</td>              
+              <td>Presup estimado $<?php echo $parameter['presupEst']; ?></td>
+              <td>Fecha entrega: <?php echo $parameter['fechaEntrega']; ?></td>              
             </tr>
             <tr>
-              <td>Marca: {{$marca}}</td>
-              <td>Modelo: {{$modelo}}</td>
+              <td>Marca: <?php echo $parameter['marca']; ?></td>
+              <td>Modelo: <?php echo $parameter['modelo']; ?></td>
             </tr>
             <tr>
               <td>IMEI:</td>
-              <td>{{$imei}}</td>              
+              <td><?php echo $parameter['imei']; ?></td>              
             </tr>
             <tr>
               <td>Descrip falla:</td>
-              <td>{{$descripFalla}}</td>              
+              <td><?php echo $parameter['descripFalla']; ?></td>              
             </tr>
             <tr>
               <td>Descrip servicio:</td>
-              <td>{{$servicio}}</td>              
+              <td><?php echo $parameter['servicio']; ?></td>              
             </tr> 
             <tr>
               <td>Repuestos:</td>
-              <td>{{$repuesto}}</td>              
+              <td><?php echo $parameter['repuesto']; ?></td>              
             </tr>               
             <tr>
               <td>Accesorio:</td>
-              <td>{{$accesorio}}</td>              
+              <td><?php echo $parameter['accesorio']; ?></td>              
             </tr>     
           </table>
 
         </td> <!-- ///////////////// -->      
         <td class="filaDetalle"><!-- ///////////////// -->      
           <strong>DETALLE DEL EQUIPO</strong>
-          <table class="tblContenedor">                       
+          <table class="tblContEquipo">                       
             <tr>
-              <td>Presup estimado ${{$presupEst}}</td>
-              <td>Fecha entrega: {{$fechaEntrega}}</td>              
+              <td>Presup estimado $<?php echo $parameter['presupEst']; ?></td>
+              <td>Fecha entrega: <?php echo $parameter['fechaEntrega']; ?></td>              
             </tr>
             <tr>
-              <td>Marca: {{$marca}}</td>
-              <td>Modelo: {{$modelo}}</td>
+              <td>Marca: <?php echo $parameter['marca']; ?></td>
+              <td>Modelo: <?php echo $parameter['modelo']; ?></td>
             </tr>
             <tr>
               <td>IMEI:</td>
-              <td>{{$imei}}</td>              
+              <td><?php echo $parameter['imei']; ?></td>              
             </tr>
             <tr>
               <td>Descrip falla:</td>
-              <td>{{$descripFalla}}</td>              
+              <td><?php echo $parameter['descripFalla']; ?></td>              
             </tr>
             <tr>
               <td>Descrip servicio:</td>
-              <td>{{$servicio}}</td>              
+              <td><?php echo $parameter['servicio']; ?></td>              
             </tr>
             <tr>
               <td>Repuestos:</td>
-              <td>{{$repuesto}}</td>              
+              <td><?php echo $parameter['repuesto']; ?></td>              
             </tr>        
             <tr>
               <td>Accesorio:</td>
-              <td>{{$accesorio}}</td>              
+              <td><?php echo $parameter['accesorio']; ?></td>              
             </tr>            
           </table>
 
@@ -258,6 +289,7 @@
     }  
     ?>
 
+    
    
   </body>
 </html>
