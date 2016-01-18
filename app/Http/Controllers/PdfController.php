@@ -33,7 +33,7 @@ class PdfController extends Controller
     {
         //require_once(base_path()."/vendor/dompdf/dompdf/dompdf_config.inc.php"); 
 
-        $idOrden = (int)$request->idOrden; 
+        $idOrden = (int)$request->idOrden;        
         
         $vectorEq = Equipo::where('equipo_idOrden_foreign', '=', $idOrden)->get();
         $cantEq = sizeof($vectorEq);

@@ -48,4 +48,5 @@ class Gama extends Model
     {
         return $this->hasMany('adminsel\Models\Equipo','equipo_idGama_foreign');
     }
+    
 }

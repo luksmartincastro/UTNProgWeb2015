@@ -30,12 +30,12 @@ class AtPublicoController extends Controller
     public function index()
     {
         $idSEL = 1;
-    	$marcas = Marca::all()->toArray();
-        $gamas = Gama::all()->toArray();
+    	$marcas = Marca::all()->toArray();        
         $accesorios = Accesorio::all()->toArray();
         $fallasGen = FallaGenerica::all()->toArray();
-        $servicios = SelConfig::find($idSEL)->servicios;
-    	
+        $servicios = SelConfig::find($idSEL)->servicios; 
+        $gamas = SelConfig::find($idSEL)->gamas;     	
+
     	return response()->json([
     			"msg"=>"Succes",
     			"marcas"=>$marcas,
@@ -370,35 +370,8 @@ class AtPublicoController extends Controller
         return response()->json([
                 "msg"=>"Succes",
                 "orden"=>$orden,
-                "equipos"=>$equipos,
-                //"eqAcc"=>$eqAcc,
-                //"vectorAcc"=>$vectorAcc
+                "equipos"=>$equipos,                
                 ],200);                
-    }
-    /*{
-        $idOrden = $request->idOrden;
-        //$idOrden = 7;
-        // buscar orden primero, para la orden buscar todos los telefonos
-        $orden = OrdenReparacion::find($idOrden);
-        $equipos = OrdenReparacion::find($idOrden)->equipos;
-        // para cada equipo se recupera la marca, modelo y gama e insertar en formato json
-        foreach ($equipos as $equipo)
-        {
-            $gama = Gama::find($equipo->equipo_idGama_foreign);
-            $modelo = Modelo::find($equipo->equipo_idMod_foreign);
-            $marca = Marca::find($modelo->modelo_idmarca_foreign);       
-            $equipo['gama'] = $gama->nombreGama;
-            $equipo['modelo'] = $modelo->nombreModelo;
-            $equipo['marca'] = $marca->nombreMarca;
-            // traer los demas datos del equipo, fallas, servicios, accesorios, repuestos
-            
-        }
-
-        return response()->json([
-                "msg"=>"Succes",
-                "orden"=>$orden,
-                "equipos"=>$equipos
-                ],200);                
-    }*/
+    }   
 
 }

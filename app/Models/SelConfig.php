@@ -26,11 +26,16 @@ class SelConfig extends Model
      * @var array
      */
     protected $hidden = [];
-	
+	//------------------------------------------
 	//------------- metodos --------------------
-
+    //------------------------------------------
 	public function servicios()
     {
-        return $this->hasMany('adminsel\Models\Servicio','servicio_idsel_foreign');
+        return $this->hasMany('adminsel\Models\Servicio','servicio_idsel_foreign'); 
+    }
+    //------------------------------------------
+    public function gamas()
+    {
+        return $this->hasMany('adminsel\Models\Gama','gamaequipo_idsel_foreign'); 
     }
 }
