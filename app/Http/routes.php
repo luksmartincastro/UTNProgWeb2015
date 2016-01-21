@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'api'], function()
 {
-    Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
+    Route::resource('authenticate', 'AuthenticateController', ['only' => ['welcome']]);
     Route::post('authenticate', 'AuthenticateController@authenticate');
 });
 

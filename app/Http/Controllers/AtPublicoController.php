@@ -20,7 +20,8 @@ use adminsel\Models\EquipoAccesorio;
 use adminsel\Models\EquipoFalla;
 use adminsel\Models\Historial; 
 use adminsel\Models\EquipoRepuesto; 
-
+use adminsel\Models\EmpleadoEquipo;
+use adminsel\Models\Users;  
 
 class AtPublicoController extends Controller
 {
@@ -330,6 +331,8 @@ class AtPublicoController extends Controller
             $equipo['gama'] = $gama->nombreGama;
             $equipo['modelo'] = $modelo->nombreModelo;
             $equipo['marca'] = $marca->nombreMarca;
+            
+
             //traer datos de falla, accesorios, repuesto
             $eqAcc = EquipoAccesorio::where('equipoaccesorio_ideq_foreign','=',$idEq)->get();           
             $vectorAcc = array();
@@ -364,6 +367,63 @@ class AtPublicoController extends Controller
                 $vectorFalla[] = 'No se declararon';
             };
             $equipo['vectorFalla'] = $vectorFalla;
+
+            //traer Repuestos--------------------------------
+            //--------------------------------
+
+            $eqRepu = EquipoRepuesto::where('equiporepuesto_ideq_foreign', '=', $idEq)->get();
+            $vectorRepu = array();
+            if (sizeof($eqRepu) != 0) 
+            {
+                foreach ($eqRepu as $eqrep) {
+                    $repuestos = Repuesto::find($eqrep->equiporepuesto_idrep_foreign);
+                    $vectorRepu[] = $repuestos->nombreRep;
+                }
+
+            } 
+            else 
+            {
+                $vectorRepu[] = 'No hay repuestos'; 
+            };
+            $equipo['vectorRepu'] = $vectorRepu;
+
+            //traer Servicios--------------------------------
+            //--------------------------------
+
+            $eqServ = ServEquipo::where('servequipo_ideq_foreign', '=', $idEq)->get();
+            $vectorServi = array();
+            if (sizeof($eqServ) != 0) 
+            {
+                foreach ($eqServ as $eqservi) 
+                {
+                    $servicios = Servicio::find($eqservi->servequipo_idserv_foreign);
+                    $vectorServi[] = $servicios->nombreServicio;
+                }
+            } 
+            else 
+            {
+                $vectorServi[] = 'No e realizaron servicios';
+            };
+
+            $equipo['vectorServi'] = $vectorServi;
+            //traer indorme tecnico------------------------
+            //---------------------------------------------
+
+            $eqInf = EmpleadoEquipo::where('empleadoequipo_ideq_foreign', '=', $idEq)->get();
+            $vectorInf = array();
+            if (sizeof($eqInf) != 0) 
+            {
+                foreach ($eqInf as $eqin) 
+                {
+                    $informe = Users::find($eqin->empleadoequipo_idUser_foreign);
+                    $vectorInf[] = $informe->informeTecnico;
+                }
+            }
+             else 
+             {
+                $vectorInf[] = 'No hay informe';
+            };
+            $equipo['vectorInf'] = $vectorInf;
 
         }
         
