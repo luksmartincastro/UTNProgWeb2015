@@ -129,9 +129,52 @@ class PdfController extends Controller
         return $pdf->stream('reporte2');               
     }
     //-----------------------------------------
-    public function imprimirOrdenRep2()
+    public function imprimirFactura(Request $request)
     {
-                
+        $idOrden = (int)$request->idOrden;
+        $vectorEqu = Equipo::where('equipo_idOrden_foreign', '=', $idOrden)->get();
+        $cantEqu = sizeof($vectorEqu);  
+        foreach ($vectorEq as $eq)
+        {             
+            $parameter = array();  
+            $parameter['cantEq'] = $cantEq; 
+            //---- recuperar datos del negocio ----
+            $sel = SELConfig::find(1);
+            $parameter['cuit'] = $sel->cuit;
+            $parameter['direc'] = $sel->direccion;
+            $parameter['tel'] = $sel->telefono;
+            $parameter['fecha'] = date('d-m-Y');
+            $parameter['numOr'] = '000'.$idOrden;
+            // --- recuperamos datos del cliente
+            $orden = OrdenReparacion::find($idOrden);
+            $parameter['apenom'] = $orden->apeNom;
+            $parameter['anticipo'] = $orden->anticipo;
+            $parameter['telefono'] = $orden->telefono;
+            $parameter['domicilio'] = $orden->domicilio;
+            //-----RECUPERAR DATOS DEL EQUIPO-----
+            $mod = Modelo::find($eq->equipo_idMod_foreign);     
+            $mar = Marca::find($mod->modelo_idmarca_foreign);
+            $parameter['marca'] = $mar->nombreMarca;
+            $parameter['modelo'] = $mod->nombreModelo;
+            $parameter['imei'] = $eq->imei;   
+            $parameter['presupEst'] = $eq->presupEstimado;
+            //-----RECUPERAR DATOS DE LOS SERVICIOS-----
+            $vectorServ = ServEquipo::where('servequipo_ideq_foreign', '=', $eq->id)->get();
+            $parameter['servicio'] = '';
+            if (sizeof($vectorServ) != 0)
+            {                
+                foreach ($vectorServ as $eqServ)
+                { 
+                    $serv = Servicio::find($eqServ->servequipo_idserv_foreign);         
+                    $parameter['servicio'] = $parameter['servicio'].' - '.$serv->nombreServicio;
+                }                
+            } else {
+                $parameter['servicio'] = 'NO SE DECLARARON SERVICIOS';
+            }           
+            //-------------------------------------------
+            $parametro[] = $parameter;
+        } 
+        
         $pdf = PDF::loadView('Reportes.ReporteOrdenRep',$parameter)->setPaper('a4')->setOrientation('landscape');              
         return $pdf->stream();        
     }

@@ -410,17 +410,17 @@ class AtPublicoController extends Controller
             //---------------------------------------------
 
             $eqInf = EmpleadoEquipo::where('empleadoequipo_ideq_foreign', '=', $idEq)->get();
+            //var_dump($eqInf);
             $vectorInf = array();
             if (sizeof($eqInf) != 0) 
             {
                 foreach ($eqInf as $eqin) 
-                {
-                    $informe = Users::find($eqin->empleadoequipo_idUser_foreign);
-                    $vectorInf[] = $informe->informeTecnico;
+                {                    
+                    $vectorInf[] = $eqin->informeTecnico;
                 }
             }
-             else 
-             {
+            else 
+            {
                 $vectorInf[] = 'No hay informe';
             };
             $equipo['vectorInf'] = $vectorInf;
