@@ -502,7 +502,6 @@ class AtPublicoController extends Controller
 
                 //traer Servicios--------------------------------
                 //--------------------------------
-
                 $eqServ = ServEquipo::where('servequipo_ideq_foreign', '=', $idEq)->get();
                 $vectorServi = array();
                 if (sizeof($eqServ) != 0) 
@@ -540,7 +539,6 @@ class AtPublicoController extends Controller
                 $equipoNO[] = $equipo;
                 
             }
-
         }
         
         return response()->json([

@@ -128,12 +128,11 @@ class PdfController extends Controller
         $pdf = PDF::loadView('Reportes.reporte2', ['parameters'=>$parametro])->setPaper('a4')->setOrientation('landscape');              
         return $pdf->stream('reporte2');               
     }
+
     //-----*****************************------------------------------------
 
     public function imprimirFactura(Request $request)
     {
-        
-
         $parameter = array();  
         $idEquipo = (int)$request->idEquipo;        
 
@@ -181,6 +180,7 @@ class PdfController extends Controller
         $pdf = PDF::loadView('Reportes.factura', ['parameter'=>$parameter])->setPaper('a4');              
         return $pdf->stream('factura');               
     }   
+
 
     
 }
