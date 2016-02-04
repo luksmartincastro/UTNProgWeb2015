@@ -315,122 +315,239 @@ class AtPublicoController extends Controller
     //------------------------------------------
     //------------------------------------------
     public function getTraerOrden(Request $request)
+    //public function getTraerOrden()
     {
         $idOrden = $request->idOrden;        
-       // $idOrden = 7;
+        //$idOrden = 7;
         // buscar orden primero, para la orden buscar todos los telefonos
         $orden = OrdenReparacion::find($idOrden);
         $equipos = OrdenReparacion::find($idOrden)->equipos;
+        $equipoOK = array();
+        $equipoNO = array();
+        //$equipoOK = Equipo::where('fechaEntrega', '=', $fechaCosulta);   
+        //$equipoOK = array();
         // para cada equipo se recupera la marca, modelo y gama e insertar en formato json
         foreach ($equipos as $equipo)
         {
-            $idEq = $equipo->id;
-            $gama = Gama::find($equipo->equipo_idGama_foreign);
-            $modelo = Modelo::find($equipo->equipo_idMod_foreign);
-            $marca = Marca::find($modelo->modelo_idmarca_foreign);       
-            $equipo['gama'] = $gama->nombreGama;
-            $equipo['modelo'] = $modelo->nombreModelo;
-            $equipo['marca'] = $marca->nombreMarca;
-            
+            if ($equipo->estadoReparacion == 'LISTO') {
+                # code...
+                $idEq = $equipo->id;
+                $gama = Gama::find($equipo->equipo_idGama_foreign);
+                $modelo = Modelo::find($equipo->equipo_idMod_foreign);
+                $marca = Marca::find($modelo->modelo_idmarca_foreign);       
+                $equipo['gama'] = $gama->nombreGama;
+                $equipo['modelo'] = $modelo->nombreModelo;
+                $equipo['marca'] = $marca->nombreMarca;
+                
 
-            //traer datos de falla, accesorios, repuesto
-            $eqAcc = EquipoAccesorio::where('equipoaccesorio_ideq_foreign','=',$idEq)->get();           
-            $vectorAcc = array();
-            if (sizeof($eqAcc) != 0)
-            {               
-                foreach ($eqAcc as $eqa)
-                {                   
-                    $accesorio = Accesorio::find($eqa->equipoaccesorio_idacc_foreign);
-                    $vectorAcc[] = $accesorio->nombreAccesorio;
+                //traer datos de falla, accesorios, repuesto
+                $eqAcc = EquipoAccesorio::where('equipoaccesorio_ideq_foreign','=',$idEq)->get();           
+                $vectorAcc = array();
+                if (sizeof($eqAcc) != 0)
+                {               
+                    foreach ($eqAcc as $eqa)
+                    {                   
+                        $accesorio = Accesorio::find($eqa->equipoaccesorio_idacc_foreign);
+                        $vectorAcc[] = $accesorio->nombreAccesorio;
+                    }
                 }
+                else
+                {
+                    $vectorAcc[] = 'No se declararon';
+                };
+                $equipo['vectorAcc'] = $vectorAcc;
+
+                //--------------------------------
+
+                $eqFalla = EquipoFalla::where('equipofalla_ideq_foreign','=',$idEq)->get();           
+                $vectorFalla = array();
+                if (sizeof($eqFalla) != 0)
+                {               
+                    foreach ($eqFalla as $eqfa)
+                    {                   
+                        $fallasgen = FallaGenerica::find($eqfa->equipofalla_idfallaGen_foreign); 
+                        $vectorFalla[] = $fallasgen->descripcionFallaGen;
+                    }
+                }
+                else
+                {
+                    $vectorFalla[] = 'No se declararon';
+                };
+                $equipo['vectorFalla'] = $vectorFalla;
+
+                //traer Repuestos--------------------------------
+                //--------------------------------
+
+                $eqRepu = EquipoRepuesto::where('equiporepuesto_ideq_foreign', '=', $idEq)->get();
+                $vectorRepu = array();
+                if (sizeof($eqRepu) != 0) 
+                {
+                    foreach ($eqRepu as $eqrep) {
+                        $repuestos = Repuesto::find($eqrep->equiporepuesto_idrep_foreign);
+                        $vectorRepu[] = $repuestos->nombreRep;
+                    }
+
+                } 
+                else 
+                {
+                    $vectorRepu[] = 'No hay repuestos'; 
+                };
+                $equipo['vectorRepu'] = $vectorRepu;
+
+                //traer Servicios--------------------------------
+                //--------------------------------
+
+                $eqServ = ServEquipo::where('servequipo_ideq_foreign', '=', $idEq)->get();
+                $vectorServi = array();
+                if (sizeof($eqServ) != 0) 
+                {
+                    foreach ($eqServ as $eqservi) 
+                    {
+                        $servicios = Servicio::find($eqservi->servequipo_idserv_foreign);
+                        $vectorServi[] = $servicios->nombreServicio;
+                    }
+                } 
+                else 
+                {
+                    $vectorServi[] = 'No e realizaron servicios';
+                };
+
+                $equipo['vectorServi'] = $vectorServi;
+                //traer indorme tecnico------------------------
+                //---------------------------------------------
+
+                $eqInf = EmpleadoEquipo::where('empleadoequipo_ideq_foreign', '=', $idEq)->get();
+                $vectorInf = array();
+                if (sizeof($eqInf) != 0) 
+                {
+                    foreach ($eqInf as $eqin) 
+                    {
+                        $informe = Users::find($eqin->empleadoequipo_idUser_foreign);
+                        $vectorInf[] = $informe->informeTecnico;
+                    }
+                }
+                 else 
+                 {
+                    $vectorInf[] = 'No hay informe';
+                };
+                $equipo['vectorInf'] = $vectorInf;
+
+                $equipoOK[] = $equipo;
+
             }
             else
             {
-                $vectorAcc[] = 'No se declararon';
-            };
-            $equipo['vectorAcc'] = $vectorAcc;
+                $idEq = $equipo->id;
+                $gama = Gama::find($equipo->equipo_idGama_foreign);
+                $modelo = Modelo::find($equipo->equipo_idMod_foreign);
+                $marca = Marca::find($modelo->modelo_idmarca_foreign);       
+                $equipo['gama'] = $gama->nombreGama;
+                $equipo['modelo'] = $modelo->nombreModelo;
+                $equipo['marca'] = $marca->nombreMarca;
+                
 
-            //--------------------------------
-
-            $eqFalla = EquipoFalla::where('equipofalla_ideq_foreign','=',$idEq)->get();           
-            $vectorFalla = array();
-            if (sizeof($eqFalla) != 0)
-            {               
-                foreach ($eqFalla as $eqfa)
-                {                   
-                    $fallasgen = FallaGenerica::find($eqfa->equipofalla_idfallaGen_foreign); 
-                    $vectorFalla[] = $fallasgen->descripcionFallaGen;
+                //traer datos de falla, accesorios, repuesto
+                $eqAcc = EquipoAccesorio::where('equipoaccesorio_ideq_foreign','=',$idEq)->get();           
+                $vectorAcc = array();
+                if (sizeof($eqAcc) != 0)
+                {               
+                    foreach ($eqAcc as $eqa)
+                    {                   
+                        $accesorio = Accesorio::find($eqa->equipoaccesorio_idacc_foreign);
+                        $vectorAcc[] = $accesorio->nombreAccesorio;
+                    }
                 }
-            }
-            else
-            {
-                $vectorFalla[] = 'No se declararon';
-            };
-            $equipo['vectorFalla'] = $vectorFalla;
-
-            //traer Repuestos--------------------------------
-            //--------------------------------
-
-            $eqRepu = EquipoRepuesto::where('equiporepuesto_ideq_foreign', '=', $idEq)->get();
-            $vectorRepu = array();
-            if (sizeof($eqRepu) != 0) 
-            {
-                foreach ($eqRepu as $eqrep) {
-                    $repuestos = Repuesto::find($eqrep->equiporepuesto_idrep_foreign);
-                    $vectorRepu[] = $repuestos->nombreRep;
-                }
-
-            } 
-            else 
-            {
-                $vectorRepu[] = 'No hay repuestos'; 
-            };
-            $equipo['vectorRepu'] = $vectorRepu;
-
-            //traer Servicios--------------------------------
-            //--------------------------------
-
-            $eqServ = ServEquipo::where('servequipo_ideq_foreign', '=', $idEq)->get();
-            $vectorServi = array();
-            if (sizeof($eqServ) != 0) 
-            {
-                foreach ($eqServ as $eqservi) 
+                else
                 {
-                    $servicios = Servicio::find($eqservi->servequipo_idserv_foreign);
-                    $vectorServi[] = $servicios->nombreServicio;
+                    $vectorAcc[] = 'No se declararon';
+                };
+                $equipo['vectorAcc'] = $vectorAcc;
+
+                //--------------------------------
+
+                $eqFalla = EquipoFalla::where('equipofalla_ideq_foreign','=',$idEq)->get();           
+                $vectorFalla = array();
+                if (sizeof($eqFalla) != 0)
+                {               
+                    foreach ($eqFalla as $eqfa)
+                    {                   
+                        $fallasgen = FallaGenerica::find($eqfa->equipofalla_idfallaGen_foreign); 
+                        $vectorFalla[] = $fallasgen->descripcionFallaGen;
+                    }
                 }
-            } 
-            else 
-            {
-                $vectorServi[] = 'No e realizaron servicios';
-            };
-
-            $equipo['vectorServi'] = $vectorServi;
-            //traer indorme tecnico------------------------
-            //---------------------------------------------
-
-            $eqInf = EmpleadoEquipo::where('empleadoequipo_ideq_foreign', '=', $idEq)->get();
-            $vectorInf = array();
-            if (sizeof($eqInf) != 0) 
-            {
-                foreach ($eqInf as $eqin) 
+                else
                 {
-                    $informe = Users::find($eqin->empleadoequipo_idUser_foreign);
-                    $vectorInf[] = $informe->informeTecnico;
+                    $vectorFalla[] = 'No se declararon';
+                };
+                $equipo['vectorFalla'] = $vectorFalla;
+
+                //traer Repuestos--------------------------------
+                //--------------------------------
+
+                $eqRepu = EquipoRepuesto::where('equiporepuesto_ideq_foreign', '=', $idEq)->get();
+                $vectorRepu = array();
+                if (sizeof($eqRepu) != 0) 
+                {
+                    foreach ($eqRepu as $eqrep) {
+                        $repuestos = Repuesto::find($eqrep->equiporepuesto_idrep_foreign);
+                        $vectorRepu[] = $repuestos->nombreRep;
+                    }
+
+                } 
+                else 
+                {
+                    $vectorRepu[] = 'No hay repuestos'; 
+                };
+                $equipo['vectorRepu'] = $vectorRepu;
+
+                //traer Servicios--------------------------------
+                //--------------------------------
+
+                $eqServ = ServEquipo::where('servequipo_ideq_foreign', '=', $idEq)->get();
+                $vectorServi = array();
+                if (sizeof($eqServ) != 0) 
+                {
+                    foreach ($eqServ as $eqservi) 
+                    {
+                        $servicios = Servicio::find($eqservi->servequipo_idserv_foreign);
+                        $vectorServi[] = $servicios->nombreServicio;
+                    }
+                } 
+                else 
+                {
+                    $vectorServi[] = 'No e realizaron servicios';
+                };
+
+                $equipo['vectorServi'] = $vectorServi;
+                //traer indorme tecnico------------------------
+                //---------------------------------------------
+
+                $eqInf = EmpleadoEquipo::where('empleadoequipo_ideq_foreign', '=', $idEq)->get();
+                $vectorInf = array();
+                if (sizeof($eqInf) != 0) 
+                {
+                    foreach ($eqInf as $eqin) 
+                    {
+                        $informe = Users::find($eqin->empleadoequipo_idUser_foreign);
+                        $vectorInf[] = $informe->informeTecnico;
+                    }
                 }
+                 else 
+                 {
+                    $vectorInf[] = 'No hay informe';
+                };
+                $equipo['vectorInf'] = $vectorInf;
+                $equipoNO[] = $equipo;
+                
             }
-             else 
-             {
-                $vectorInf[] = 'No hay informe';
-            };
-            $equipo['vectorInf'] = $vectorInf;
 
         }
         
         return response()->json([
                 "msg"=>"Succes",
                 "orden"=>$orden,
-                "equipos"=>$equipos,                
+                "equiposOK"=>$equipoOK,                
+                "equiposNO"=>$equipoNO,                
                 ],200);                
     }   
 

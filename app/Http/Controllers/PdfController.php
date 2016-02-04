@@ -128,13 +128,59 @@ class PdfController extends Controller
         $pdf = PDF::loadView('Reportes.reporte2', ['parameters'=>$parametro])->setPaper('a4')->setOrientation('landscape');              
         return $pdf->stream('reporte2');               
     }
-    //-----------------------------------------
-    public function imprimirOrdenRep2()
+    //-----*****************************------------------------------------
+
+    public function imprimirFactura(Request $request)
     {
-                
-        $pdf = PDF::loadView('Reportes.ReporteOrdenRep',$parameter)->setPaper('a4')->setOrientation('landscape');              
-        return $pdf->stream();        
-    }
+        
+
+        $parameter = array();  
+        $idEquipo = (int)$request->idEquipo;        
+
+        
+        $eq = Equipo::find($idEquipo);
+        
+        //---- recuperar datos del negocio ----
+        $sel = SELConfig::find(1);
+        $parameter['cuit'] = $sel->cuit;
+        $parameter['direc'] = $sel->direccion;
+        $parameter['tel'] = $sel->telefono;
+        $parameter['fecha'] = date('d-m-Y');
+        // --- recuperamos datos del cliente
+        $orden = OrdenReparacion::find($eq->equipo_idOrden_foreign);
+        $parameter['apenom'] = $orden->apeNom;        
+        $parameter['telefono'] = $orden->telefono;        
+        $parameter['total'] = 0; 
+        $parameter['numOr'] = '000'.$orden->id;
+        
+
+        $mod = Modelo::find($eq->equipo_idMod_foreign);     
+        $mar = Marca::find($mod->modelo_idmarca_foreign);
+        $parameter['marca'] = $mar->nombreMarca;
+        $parameter['modelo'] = $mod->nombreModelo;
+        $parameter['presupFinal'] = $eq->presupFinal;
+         $parameter['imei'] = $eq->imei; 
+
+        //-----RECUPERAR DATOS DE LAS FALLAS-----
+        $parameter['servicio'] = '';
+        $vectorFallaEq = EquipoFalla::where('equipofalla_ideq_foreign', '=', $eq->id)->get();            
+        if (sizeof($vectorFallaEq) != 0)
+        {                
+            $parameter['servicio'] = 'Servicio hardware';                            
+        } 
+        //-----RECUPERAR DATOS DE LOS SERVICIOS-----
+        $vectorServ = ServEquipo::where('servequipo_ideq_foreign', '=', $eq->id)->get();
+        if (sizeof($vectorServ) != 0)
+        {       
+            $parameter['servicio'] = $parameter['servicio'].' - '.'Servicio software'; 
+        }
+        //-------------------------------------------        
+        $parameter['total'] = $parameter['total'] + $eq->presupFinal; 
+
+        
+        $pdf = PDF::loadView('Reportes.factura', ['parameter'=>$parameter])->setPaper('a4');              
+        return $pdf->stream('factura');               
+    }   
 
     
 }
