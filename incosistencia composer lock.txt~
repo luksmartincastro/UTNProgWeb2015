@@ -1,0 +1,42 @@
+ {
+            "name": "paragonie/random_compat",
+<<<<<<< HEAD
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "a208865a5aeffc2dbbef2a5b3409887272d93f32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/a208865a5aeffc2dbbef2a5b3409887272d93f32",
+                "reference": "a208865a5aeffc2dbbef2a5b3409887272d93f32",
+=======
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "5f727f8859ceb0f6ccf5d5e73a382b501abf5d43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/5f727f8859ceb0f6ccf5d5e73a382b501abf5d43",
+                "reference": "5f727f8859ceb0f6ccf5d5e73a382b501abf5d43",
+>>>>>>> a7428db03b94369e3d23b753a9f55117cf7398ff
+                "shasum": ""
+            },
+
+
+
+  "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "pseudorandom",
+                "random"
+            ],
+<<<<<<< HEAD
+            "time": "2015-12-01 02:52:15"
+=======
+            "time": "2015-12-09 17:01:19"
+>>>>>>> a7428db03b94369e3d23b753a9f55117cf7398ff
+        },
