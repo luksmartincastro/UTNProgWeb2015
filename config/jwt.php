@@ -13,7 +13,7 @@ return [
     */
 
 
-    'secret' => env('JWT_SECRET', 'aOG9JuODVVNjgsor1RKoTS33noKN8RGk'),
+    'secret' => env('JWT_SECRET', 'Tek5WN6E4vl7Se6loE08uUOS0WLhr1oA'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'user' => 'App\User',
+    'user' => 'adminsel\User',
 
     /*
     |--------------------------------------------------------------------------

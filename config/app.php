@@ -147,7 +147,8 @@ return [
         'Way\Generators\GeneratorsServiceProvider',
         'Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider',
 
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        //Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
         Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
@@ -198,7 +199,8 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class,
+        //'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'PDF'       => 'Barryvdh\DomPDF\Facade',
     ],

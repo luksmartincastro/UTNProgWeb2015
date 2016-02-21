@@ -24,6 +24,7 @@
         ],
         "psr-4": {
             "adminsel\\": "app/",
+            "App\\": "app/",
             "Models\\": "app/Models/"
         }
     },
