@@ -409,7 +409,7 @@ class AtPublicoController extends Controller
                 } 
                 else 
                 {
-                    $vectorServi[] = 'No e realizaron servicios';
+                    $vectorServi[] = 'No se realizaron servicios';
                 };
 
                 $equipo['vectorServi'] = $vectorServi;
